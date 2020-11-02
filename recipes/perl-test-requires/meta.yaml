@@ -1,28 +1,24 @@
-{% set name = "perl-test-requires" %}
-{% set version = "0.10" %}
-{% set sha256 = "2768a391d50ab94b95cefe540b9232d7046c13ee86d01859e04c044903222eb5" %}
-
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: perl-test-requires
+  version: "0.10"
 
 source:
+  fn: Test-Requires-0.10.tar.gz
   url: https://cpan.metacpan.org/authors/id/T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
-  sha256: {{ sha256 }}
+  md5: 0d5da779609d0c8fa6f796b45ff8c6f3
 
 build:
-  noarch: generic
-  number: 3
+  number: 1
 
 requirements:
-  host:
-    - perl
-    - perl-extutils-makemaker
+  build:
+    - perl-threaded
 
   run:
-    - perl
+    - perl-threaded
 
 test:
+  # Perl 'use' tests
   imports:
     - Test::Requires
 

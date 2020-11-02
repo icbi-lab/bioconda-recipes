@@ -1,27 +1,23 @@
 package:
   name: perl-readonly
-  version: 2.05
+  version: 1.04
 
 source:
-  url: https://cpan.metacpan.org/authors/id/S/SA/SANKO/Readonly-2.05.tar.gz
-  sha256: 4b23542491af010d44a5c7c861244738acc74ababae6b8838d354dfb19462b5e
+  fn: Readonly-1.04.tar.gz
+  url: http://cpan.metacpan.org/authors/id/S/SA/SANKO/Readonly-1.04.tar.gz
+  md5: 875c911ed43d0ecf2c5abed60ee6ae18
 
 build:
-  noarch: generic
   number: 0
 
 requirements:
-  host:
+  build:
     - perl
-    - perl-module-build-tiny
+    - perl-module-build
+    - perl-cpan-meta
 
   run:
     - perl
-
-test:
-  # Perl 'use' tests
-  commands:
-    - perl -e 'use Readonly'
 
 about:
   home: https://github.com/sanko/readonly

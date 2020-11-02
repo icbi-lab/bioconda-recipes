@@ -1,10 +1,12 @@
 #!/bin/bash
+export CFLAGS="-I$PREFIX/include"
+export CXXFLAGS="-I$PREFIX/include"
+export LDFLAGS="-L$PREFIX/lib"
+export C_INCLUDE_PATH=${PREFIX}/include
+export CPLUS_INCLUDE_PATH=${PREFIX}/include
 
-mkdir -p "${PREFIX}/bin"
+set -eu -o pipefail
 
-"${CXX}" ${CPPFLAGS} ${CXXFLAGS} \
-  -Wall -O2 \
-  -std=c++03 \
-  -o "${PREFIX}/bin/"grabix \
-  grabix_main.cpp grabix.cpp bgzf.c \
-  ${LDFLAGS} -lstdc++ -lz
+make
+mkdir -p $PREFIX/bin
+cp grabix $PREFIX/bin

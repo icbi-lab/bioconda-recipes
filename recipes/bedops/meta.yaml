@@ -1,32 +1,25 @@
-package:
-  name: bedops
-  version: 2.4.39
-
 build:
   number: 0
 
+about:
+    home: http://bedops.readthedocs.io
+    license: GPLv2
+    summary: High-performance genomic feature operations.
+package:
+    name: bedops
+    version: 2.4.30
 source:
-  url: https://github.com/bedops/bedops/archive/v2.4.39.tar.gz
-  sha256: f8bae10c6e1ccfb873be13446c67fc3a54658515fb5071663883f788fc0e4912
+    url: https://github.com/bedops/bedops/archive/v2.4.30.tar.gz
+    fn: bedops-2.4.30.tar.gz
+    sha256: 218e0e367aa79747b2f90341d640776eea17befc0fdc35b0cec3c6184098d462
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
+    - gcc
   run:
-    # seems to be needed for bam2bed
-    - samtools
+    - libgcc
 
 test:
-  commands:
-    - bedops --help
-    - gtf2bed --help
-
-about:
-  home: http://bedops.readthedocs.io
-  license: GPLv2
-  summary: High-performance genomic feature operations.
-
-extra:
-  identifiers:
-    - biotools:Bedops
-    - doi:10.1093/bioinformatics/bts277
+    commands:
+      - bedops --help
+      - gtf2bed --help

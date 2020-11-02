@@ -1,24 +1,23 @@
 {% set name = "hardklor" %}
-{% set version = "2.3.2" %}
+{% set version = "2.3.0" %}
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
+  fn: {{ version }}.tar.gz
   url: https://github.com/mhoopmann/hardklor/archive/{{ version }}.tar.gz
-  sha256: 66fff0bec997b4ee0eaf3217094b7487fa8e386f06310ef8df3b59edb2ec3f81
-  patches:
-    - patch
 
 build:
   number: 0
-  skip: True  # [osx]
+  skip: True # [osx]
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - gcc   # [linux]
+    - llvm  # [osx]
   run:
+    - libgcc # [linux]
 
 test:
   commands:
@@ -28,7 +27,3 @@ about:
   home: https://github.com/mhoopmann/hardklor
   license: Apache License, Version 2.0
   summary: Analyze mass spectra
-  
-extra:
-  identifiers:
-    - doi:10.1002/0471250953.bi1318s37

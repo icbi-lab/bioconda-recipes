@@ -1,29 +1,32 @@
 {% set name = "cansnper" %}
-{% set version = "1.0.10" %}
+{% set version = "1.0.8" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 build:
-  number: 1
-  script: python -m pip install --no-deps --ignore-installed .
-  noarch: python
+  number: 0
+  skip: True  # [not py27]
 
 source:
-  url: https://github.com/adrlar/CanSNPer/archive/{{ version }}.tar.gz
-  sha256: a7a14315fa6ad55e143e90a6b918c389f63ef48b8abac59a62ac85d2c4e3bbb1
+  fn: {{ name|lower }}_{{ version }}.tar.gz
+  url: https://github.com/adrlar/CanSNPer/archive/v{{ version }}.tar.gz
+  md5: 3d46bb7caa3d6bdbb9c5d583636cb5e2
 
 requirements:
-  host:
-  - python <3
-  - pip
-  run:
-  - python <3
+  build:
+  - python
+  - setuptools
   - ete2
   - numpy
   - pyqt 4.*
-  - progressivemauve  # [not osx]
+
+  run:
+  - python
+  - ete2
+  - numpy
+  - pyqt 4.*
 
 test:
   commands:

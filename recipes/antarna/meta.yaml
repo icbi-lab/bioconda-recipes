@@ -1,22 +1,23 @@
-{% set version = "2.0.6" %}
-{% set sha256 = "f9d31bdddb58340faeef06afe51ce831358a37e08cdaf03d0be5bbf0163c223d" %}
-
 package:
   name: antarna
-  version: {{ version }}
+  version: "2.0.1.2"
 
 source:
-  url: https://github.com/RobertKleinkauf/antarna/archive/v{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  fn: antarna-2.0.1.2.tar.gz
+  url: https://github.com/RobertKleinkauf/antarna/archive/v2.0.1.2.tar.gz
+  sha256: 537d8e7cf94adf0d58ea3e381e21d9ff2fedc03a745abd4fbf4e48250cf2b4f3
 
 build:
   number: 0
   skip: True  # [osx or py3k]
 
 requirements:
-  host:
+  build:
     - python
-    - pip
+    - numpy
+    - uuid
+    - networkx
+    - scipy
   run:
     - python
     - numpy
@@ -33,12 +34,6 @@ test:
 
 about:
   home: https://github.com/RobertKleinkauf/antarna
-  license: MIT
+  license: The MIT License (MIT)
   license_file: LICENSE
   summary: antaRNA is a python based implementation of ant-colony optimization of the RNA inverse folding problem.
-
-extra:
-  container:
-    extended-base: True
-  identifiers:
-    - biotools:antarna

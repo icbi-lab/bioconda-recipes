@@ -3,14 +3,15 @@ package:
   version: '0.6.6'
 
 build:
-  noarch: generic
-  number: 2
+  number: 0
+  skip: True [osx]
 
 requirements:
-  host:
-    - ruby >=2.4.4
+  build:
+    - ruby
+
   run:
-    - ruby >=2.4.4
+    - ruby
     - blast
 
 test:
@@ -20,4 +21,4 @@ test:
 about:
   home: https://github.com/cboursnell/crb-blast
   license: MIT
-  summary: Conditional Reciprocal Best BLAST - high confidence ortholog assignment.
+  summary: Conditional Reciprocal Best BLAST - high confidence ortholog assignment. 

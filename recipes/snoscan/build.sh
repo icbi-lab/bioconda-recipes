@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-set -eu
+set -eu -o pipefail
 
-make -C squid-1.5.11 CC="$CC" CFLAGS="$CFLAGS"
-make CC="$CC" CFLAGS="$CFLAGS"
+make -C squid-1.5j
+make
 
 mv sort-snos sort-snos.pl
 
@@ -11,7 +11,7 @@ mv sort-snos sort-snos.pl
 
 mkdir perl-build
 #mv sort-snos perl-build
-find . -name '*.pl' ! -path './perl-build/*.pl' -exec mv {} perl-build \;
+find . -name "*.pl" | xargs -I {} mv {} perl-build
 # find . -name "*.pm`" | xargs -I {} cp {} perl-build/lib
 cd perl-build
 cp ${RECIPE_DIR}/Build.PL ./
@@ -24,6 +24,4 @@ cd ..
 
 ln -s $PREFIX/bin/sort-snos.pl  $PREFIX/bin/sort-snos
 
-mv snoscan snoscan[AHY] $PREFIX/bin
-
-chmod u+rwx $PREFIX/bin/*
+mv snoscan $PREFIX/bin

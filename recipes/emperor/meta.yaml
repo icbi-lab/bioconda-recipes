@@ -3,19 +3,23 @@ package:
   version: "0.9.51"
 
 source:
+  fn: emperor-0.9.51.tar.gz
   url: https://pypi.python.org/packages/source/e/emperor/emperor-0.9.51.tar.gz
   md5: 9b763cae89fe7b938b8acab4b39b92ba
 
 build:
-  number: 1
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
+  number: 0
+  skip: True [py3k or osx]
 
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - python
+    - numpy >=1.7
+    - qcli
+    - scikit-bio >=0.2.1,<0.3.0
+
   run:
-    - python <3
+    - python
     - numpy >=1.7
     - qcli
     - scikit-bio >=0.2.1,<0.3.0

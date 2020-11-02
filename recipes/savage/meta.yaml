@@ -1,4 +1,4 @@
-{% set version = "0.4.2" %}
+{% set version = "0.4.0" %}
 
 package:
   name: savage
@@ -6,22 +6,24 @@ package:
 
 build:
   number: 1
+  string: "py{{CONDA_PY}}_boost{{CONDA_BOOST}}_{{PKG_BUILDNUM}}"
   skip: True  # [py3k or osx]
 
 source:
-  url: https://github.com/HaploConduct/HaploConduct/archive/v0.2.1.tar.gz
-  md5: 415188452fbef01c200983f46de09605
+  fn: savage-{{ version }}.tar.gz
+  url: https://bitbucket.org/jbaaijens/savage/get/v{{ version }}.tar.gz
+  md5: eb1622cdd8a22c4d6c7fd34dc064b3cd
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-  host:
     - python
-    - boost
+    - gcc
+    - boost {{CONDA_BOOST}}*
   run:
-    - boost
+    - boost {{CONDA_BOOST}}*
     - python
     - bwa
+    - libgcc
     - kallisto >=0.43.0
     - rust-overlaps
 
@@ -30,6 +32,6 @@ test:
     - savage --help
 
 about:
-  home: https://github.com/HaploConduct/HaploConduct/tree/master/savage
+  home: https://bitbucket.org/jbaaijens/savage
   license: GPL v3
   summary: SAVAGE (Strain Aware VirAl GEnome assembly) reconstructs individual (viral) haplotypes from a mixed sample.

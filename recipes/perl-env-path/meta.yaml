@@ -1,26 +1,22 @@
-{% set name = "perl-env-path" %}
-{% set version = "0.19" %}
-{% set sha256 = "244bf093798832a7d841d9ee5b4b0e6b489996eef63541e505091aa34a9015e2" %}
-
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: perl-env-path
+  version: "0.19"
 
 source:
-  url: https://cpan.metacpan.org/authors/id/D/DS/DSB/Env-Path-0.19.tar.gz
-  sha256: {{ sha256 }}
+  fn: Env-Path-0.19.tar.gz
+  url: http://cpan.metacpan.org/authors/id/D/DS/DSB/Env-Path-0.19.tar.gz
+  md5: e0990baf757ce4f8145dd18817a589a9
 
-build:
-  noarch: generic
-  number: 2
+# build:
+  # number: 1
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
     - perl-extutils-makemaker
 
   run:
-    - perl
+    - perl-threaded
 
 test:
   imports:
@@ -30,3 +26,4 @@ about:
   home: http://metacpan.org/pod/Env::Path
   license: unknown
   summary: 'Advanced operations on path variables'
+

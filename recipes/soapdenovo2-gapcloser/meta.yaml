@@ -4,7 +4,7 @@ about:
   summary: 'a tool named GapCloser for SOAPdenovo.'
 
 build:
-  number: 2
+  number: 0
 
 package:
   name: soapdenovo2-gapcloser
@@ -12,16 +12,17 @@ package:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-  host:
-    - zlib
+      - gcc # [linux]
+      - llvm # [osx]
+      - zlib
   run:
-    - zlib
+      - libgcc # [linux]
+      - zlib
 
 source:
-  url: https://sourceforge.net/projects/soapdenovo2/files/GapCloser/src/r6/GapCloser-src-v1.12-r6.tgz
-  sha256: a6d4b21c6da838bb4274b537c6625d4688624166673bc22c74eca00c061a6911
+  fn: gapcloser.tar.gz
+  url: https://sourceforge.net/projects/soapdenovo2/files/GapCloser/src/r6/GapCloser-src-v1.12-r6.tgz/download
 
 test:
   commands:
-    - GapCloser 2>&1 | grep "input scaffold file name"
+      - GapCloser 2>&1 | grep 'input scaffold file name'

@@ -1,5 +1,5 @@
-#!/bin/bash
+
 ./configure
-make CXXFLAGS="${CXXFLAGS} -std=c++03"
+make
 
 cp allegro $PREFIX/bin

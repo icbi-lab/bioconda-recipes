@@ -13,9 +13,7 @@ import shutil
 from os import access
 from os import getenv
 from os import X_OK
-
-jar_file = 'PeptideShaker-2.0.1-SNAPSHOT.jar'
-
+jar_file = 'PeptideShaker-1.16.15.jar'
 
 default_jvm_mem_opts = ['-Xms512m', '-Xmx1g']
 

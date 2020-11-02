@@ -5,12 +5,13 @@ OUTDIR=$PREFIX/share/$PKG_NAME-$PKG_VERSION-$PKG_BUILDNUM
 mkdir -p $OUTDIR
 mkdir -p $PREFIX/bin
 
-VDIR=`ls -d $SRC_DIR/Canvas-*_x64`
-cp $RECIPE_DIR/Canvas.sh $VDIR/Canvas
-chmod +x $VDIR/Canvas
-cp $RECIPE_DIR/EvaluateCNV.sh $VDIR/Tools/EvaluateCNV/EvaluateCNV
-chmod +x $VDIR/Tools/EvaluateCNV/EvaluateCNV
+rm -f Canvas
+cp $RECIPE_DIR/Canvas.sh Canvas
+chmod +x Canvas
+rm -f Tools/EvaluateCNV/EvaluateCNV
+cp $RECIPE_DIR/EvaluateCNV.sh Tools/EvaluateCNV/EvaluateCNV
+chmod +x Tools/EvaluateCNV/EvaluateCNV
 
-cp -r $VDIR/* $OUTDIR
+cp -r * $OUTDIR
 ln -s $OUTDIR/Canvas $PREFIX/bin
 ln -s $OUTDIR/Tools/EvaluateCNV/EvaluateCNV $PREFIX/bin

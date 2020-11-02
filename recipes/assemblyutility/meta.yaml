@@ -6,19 +6,22 @@ package:
   version: {{ version }}
 
 build:
-  number: 3
+  number: 0
 
 source:
-  url: https://github.com/yechengxi/AssemblyUtility/archive/8e476764eb67ebb486e673ecbd8a0fa5d8eae22c.tar.gz
+  fn: {{ name|lower }}_{{ version }}.tar.gz  
+  url: https://github.com/yechengxi/AssemblyUtility/archive/8e476764eb67ebb486e673ecbd8a0fa5d8eae22c.tar.gz 
   md5: 113518baf23faf4d6af7605373e2d49f
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-  host:
-    - zlib
+  - gcc # [not osx]
+  - llvm  # [osx]
+  - zlib
+
   run:
-    - zlib
+  - libgcc # [not osx]
+  - zlib
 
 test:
   commands:
@@ -28,4 +31,5 @@ test:
 about:
   home: https://github.com/yechengxi/AssemblyUtility
   summary: Tools for DBG2OLC genoome assembler
-  license: MIT
+
+

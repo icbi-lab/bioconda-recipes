@@ -3,9 +3,10 @@ package:
   version: "0.4.1.9"
 
 build:
-  number: 2
+  number: 1
 
 source:
+  fn: cmfinder-0.4.1.9.tgz
   url: https://sourceforge.net/projects/weinberg-cmfinder/files/cmfinder-0.4.1.9.tgz
   sha256: 83a8609a15f7f08772384f5f308fd944a1f88c9cc47346e2effc05b2771855b1
   patches:
@@ -14,9 +15,10 @@ source:
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - gcc
   run:
     - blast
+    - libgcc
     - perl
 
 test:

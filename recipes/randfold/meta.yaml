@@ -3,7 +3,7 @@ package:
   version: 2.0.1
 
 build:
-  number: 2
+  number: 0
 
 source:
   url: http://bioinformatics.psb.ugent.be/supplementary_data/erbon/nov2003/downloads/randfold-2.0.1.tar.gz
@@ -13,9 +13,11 @@ source:
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - gcc   # [not osx]
+    - llvm  # [osx]
 
   run:
+    - libgcc    # [not osx]
 
 test:
   commands:
@@ -39,8 +41,3 @@ about:
   license: GNU GPLv2
   license_file: LICENSE
   summary: Minimum free energy of folding randomization test software
-
-extra:
-  identifiers:
-    - biotools:randfold
-    - doi:10.1093/bioinformatics/bth374

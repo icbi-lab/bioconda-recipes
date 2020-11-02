@@ -3,20 +3,20 @@ package:
   version: "1.71"
 
 source:
+  fn: AppConfig-1.71.tar.gz
   url: https://cpan.metacpan.org/authors/id/N/NE/NEILB/AppConfig-1.71.tar.gz
   md5: 7747d9241561ed5567d5e134b8648707
 
 build:
-  noarch: generic
-  number: 1
+  number: 0
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
     - perl-test-pod
 
   run:
-    - perl
+    - perl-threaded
 
 test:
   # Perl 'use' tests

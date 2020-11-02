@@ -12,7 +12,7 @@ source:
   git_rev: c2f9aeb
 
 build:
-  number: 1
+  number: 0
   skip: True # [py3k]
 
 test:
@@ -26,9 +26,9 @@ test:
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - gcc # [linux]
+    - llvm # [osx]
     - cmake
-  host:
     - numpy
     - python
     - pycsg ==0.3.12

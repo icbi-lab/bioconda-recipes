@@ -1,23 +1,24 @@
-{% set version = "0.7" %}
-
 package:
   name: theta2
-  version: {{ version }}
-
+  version: '0.7'
 build:
-  number: 2
-  noarch: generic
-
+  number: 0
+  skip: True # [not py27 or osx]
 source:
-  url: https://github.com/raphael-group/THetA/archive/v{{ version }}.tar.gz
+  fn: theta-0.7.tar.gz
+  url: https://github.com/raphael-group/THetA/archive/v0.7.tar.gz
   sha256: 474452fa87a1ca0228137693bfede3200b91e4e166b2216c4bd24f8b270c1dea
 
 requirements:
-  host:
-    - wget
-    - unzip
+  build:
+    - python
+    - numpy
+    - scipy
+    - matplotlib
+    - joblib
+    - numexpr
   run:
-    - python <3
+    - python
     - numpy
     - scipy
     - matplotlib
@@ -31,5 +32,4 @@ test:
 about:
   home: https://github.com/raphael-group/THetA
   license: Modified MIT (no inclusion in commercial tools)
-  license_file: README.txt
   summary: Estimate tumor purity and clonal/subclonal copy number aberrations directly from high-throughput DNA sequencing data

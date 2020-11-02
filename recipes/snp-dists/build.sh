@@ -1,4 +1,8 @@
 #!/bin/bash
 
-mkdir -p "${PREFIX}/bin"
-LIBS="${LDFLAGS}" make CC="${CC}" PREFIX="${PREFIX}" install
+make
+
+mkdir -p "$PREFIX"/bin
+
+cp snp-dists "$PREFIX"/bin/
+

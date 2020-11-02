@@ -1,5 +1,5 @@
 build:
-  number: 5
+  number: 2
 
 package:
   name: diamond
@@ -12,13 +12,10 @@ source:
 # We pin on gcc version to avoid gcc-5 dual ABI issues depending on boost.
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - gcc # [unix]
     - cmake
-  host:
-    - zlib
   run:
-    - zlib
+    - libgcc # [unix]
 
 test:
   commands:
@@ -28,8 +25,3 @@ about:
   home: http://ab.inf.uni-tuebingen.de/software/diamond/
   license: BSD
   summary: Accelerated BLAST compatible local sequence aligner
-
-extra:
-  identifiers:
-    - biotools:Diamond
-    - doi:10.1038/nmeth.3176

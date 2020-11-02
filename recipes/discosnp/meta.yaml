@@ -1,26 +1,24 @@
-{% set version = "2.5.4" %}
-{% set sha256 = "9577e32e90baf4d2641303fcfd341ba4dd58972b7197c0c594951d2485f62630" %}
-
 package:
   name: discosnp
-  version: {{ version }}
+  version: '2.3.0'
 
 source:
-  url: https://github.com/GATB/DiscoSnp/releases/download/v{{ version }}/DiscoSNP.-v{{ version }}-Source.tar.gz
-  sha256: {{ sha256 }}
+  fn: DiscoSNP.-v2.3.0-Source.tar.gz
+  url: "https://github.com/GATB/DiscoSnp/releases/download/v2.3.0/DiscoSNP.-v2.3.0-Source.tar.gz"
+  md5: "dfc35f6f5b83e7f661f5acbcb3c03bad"
 
 build:
-  number: 0
+  number: 4
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-    - {{ compiler('c') }}
+    - gcc   # [linux]
+    - llvm  # [osx]
     - cmake
-  host:
-    - zlib
+    - zlib {{CONDA_ZLIB}}*
   run:
-    - zlib
+    - libgcc  # [linux]
+    - zlib {{CONDA_ZLIB}}*
     - bwa
     - shortreadconnector
     - python >=3.0
@@ -33,9 +31,4 @@ test:
 about:
   home: https://gatb.inria.fr/software/discosnp/
   license: GNU Affero General Public License v3.0
-  summary: reference-free small variant caller for short read sequencing data
-
-extra:
-  identifiers:
-    - biotools:discosnp
-    - doi:10.1093/nar/gkn000
+  summary: Designed for discovering all kinds of SNPs

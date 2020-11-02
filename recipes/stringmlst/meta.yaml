@@ -1,5 +1,6 @@
 {% set name = "stringmlst" %}
-{% set version = "0.6.3" %}
+{% set version = "0.5.1a" %}
+{% set hash = "f446201bc63b09eef61dbfb0c0d3ba285b39b466008643a08baf9c57784c0ee8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,18 +8,22 @@ package:
 
 source:
   url: https://github.com/jordanlab/stringMLST/archive/{{ version }}.tar.gz
-  sha256: 5c126c53769bf265fa9d5de510187624666e67e11946ff16217bc6365e3e1cee
+  fn: {{ name|lower }}_{{ version }}.tar.gz
+  sha256: {{ hash }}
 
 build:
-  noarch: python
   number: 0
+  skip: True  # [py27]    
 
 requirements:
-  host:
-    - python >=3
-    - pip
+  build:
+    - python
+    - setuptools
+    - pyfaidx
+    - lxml
+
   run:
-    - python >=3
+    - python
     - bwa
     - bedtools
     - samtools >=1.0

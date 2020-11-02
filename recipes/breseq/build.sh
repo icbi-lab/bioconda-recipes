@@ -1,5 +1,9 @@
 #!/bin/bash
-set -eux
-./configure --prefix=$PREFIX
-make
+export CFLAGS="-I$PREFIX/include"
+export LDFLAGS="-L$PREFIX/lib"
+export CPATH=${PREFIX}/include
+
+mkdir -p $PREFIX/bin
+./configure --prefix=${PREFIX}
+make 
 make install

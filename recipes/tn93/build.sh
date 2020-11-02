@@ -1,9 +1,6 @@
 #!/bin/bash
 
-cmake \
-    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-    -DINSTALL_PREFIX="${PREFIX}" \
-    -DCMAKE_CXX_STANDARD=11 \
-    .
+cmake . -DCMAKE_INSTALL_PREFIX=$PREFIX -DINSTALL_PREFIX=$PREFIX
 make
 make install
+

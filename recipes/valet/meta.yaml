@@ -7,18 +7,21 @@ package:
   version: {{ version }}
 
 source:
+  fn: v{{ version }}.tar.gz
   url: https://github.com/marbl/VALET/archive/v{{ version }}.tar.gz
   md5: {{ md5 }}
   patches:
     - valet.patch
 
 build:
-  noarch: generic
-  number: 3
+  number: 0
+  skip: True # [py3k]
 
 requirements:
+  build:
+    - python
   run:
-    - python <3
+    - python
     - bowtie2
     - samtools
     - bedtools

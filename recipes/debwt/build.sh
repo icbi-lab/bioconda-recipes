@@ -1,5 +1,8 @@
 #!/bin/bash
 
-make CC="${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}"
-install -d "${PREFIX}/bin"
-install deBWT "${PREFIX}/bin/"
+export C_INCLUDE_PATH=${PREFIX}/include
+export LIBRARY_PATH=${PREFIX}/lib
+
+make
+mkdir -p $PREFIX/bin
+cp deBWT $PREFIX/bin

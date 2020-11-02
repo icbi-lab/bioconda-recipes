@@ -1,12 +1,12 @@
 #!/bin/bash
-export LIBRARY_PATH="${PREFIX}/lib:/usr/lib:/usr/lib64"
-export LD_LIBRARY_PATH="${PREFIX}/lib:/usr/lib:/usr/lib64"
+export LIBRARY_PATH="${PREFIX}/lib"
+export LD_LIBRARY_PATH="${PREFIX}/lib"
 export LDFLAGS="-L${PREFIX}/lib"
 export CPPFLAGS="-I${PREFIX}/include"
 
-stack setup --local-bin-path ${PREFIX}/bin
+stack setup
 stack update
-stack install --local-bin-path ${PREFIX}/bin
+stack install --extra-include-dirs ${PREFIX}/include --local-bin-path ${PREFIX}/bin
 #cleanup
 rm -r .stack-work
 

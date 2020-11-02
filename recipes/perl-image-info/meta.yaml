@@ -3,21 +3,21 @@ package:
   version: "1.38"
 
 source:
+  fn: Image-Info-1.38.tar.gz
   url: https://cpan.metacpan.org/authors/id/S/SR/SREZIC/Image-Info-1.38.tar.gz
   md5: 0fa4db4bdf14b6f453655bafa62d766a
 
 build:
-  noarch: generic
-  number: 1
+  number: 0
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
     - perl-io-stringy
     - perl-xml-libxml   # needed for SVG support
 
   run:
-    - perl
+    - perl-threaded
     - perl-io-stringy
     - perl-xml-libxml   # needed for SVG support
 

@@ -1,22 +1,22 @@
 {% set name = "flapjack" %}
-{% set version = "1.20.10.07" %}
+{% set version = "1.16.10.31" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
+  fn: {{ name }}-{{ version }}.zip
   url: http://bioinf.hutton.ac.uk/flapjack/installers/bioconda/{{name}}-{{version}}.zip
-  md5: 19b41306c11c2ff0d559425041d97512
+  md5: f138bece56de63babaa4ccd620d5d5aa
 
 build:
-  number: 0
-  noarch: generic
+  number: 1
 
 requirements:
   build:
   run:
-    - openjdk >=11
+    - openjdk >=8,<9
 
 test:
   commands:
@@ -27,3 +27,4 @@ about:
   license: BSD-2-Clause
   license_file: docs/Flapjack.html
   summary: Flapjack provides interactive visualizations of high-throughput genotyping data.
+  

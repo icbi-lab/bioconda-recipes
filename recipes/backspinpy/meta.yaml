@@ -8,18 +8,17 @@ package:
   version: '{{ version }}'
 
 source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   '{{ hash_type }}': '{{ hash_value }}'
 
 build:
-  noarch: python
-  number: 1
-  script: python -m pip install --no-deps --ignore-installed .
+  number: 0
+  script: python setup.py install  --single-version-externally-managed --record=record.txt
 
 requirements:
-  host:
+  build:
     - python
-    - pip
     - setuptools
     - future
     - numpy

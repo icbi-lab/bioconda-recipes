@@ -3,16 +3,14 @@ package:
   version: 0.3.2
 
 build:
-  noarch: python
-  number: 2
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
+  number: 0
 
 source:
   url: https://github.com/NKI-CCB/imfusion/archive/0.3.2.tar.gz
   sha256: 957747b0c2cb91c18860991e809be84595d9fc3ed88d575b474344fdbe95bd56
 
 requirements:
-  host:
+  build:
     - setuptools
 
     # Python dependencies.

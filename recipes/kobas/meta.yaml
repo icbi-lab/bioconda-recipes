@@ -3,23 +3,21 @@ package:
   version: "3.0.3"
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
-  number: 3
+  number: 0
+  skip: True # [py3k]
 
 source:
   url: http://kobas.cbi.pku.edu.cn/kobas-2.1.1/kobas-3.0.3.tar.gz
   md5: 2e812ab60925c261ffdb799542a76b15
   patches:
     - package.patch
-    - Replace-deprecated-Seq.tostring-method.patch
 
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - python
+    - setuptools
   run:
-    - python <3
+    - python
     - bioconductor-qvalue
     - blast
     - numpy
@@ -42,7 +40,3 @@ about:
   home: http://kobas.cbi.pku.edu.cn
   license: Biopython License Agreement
   summary: KEGG Orthology Based Annotation System
-
-extra:
-  identifiers:
-    - biotools:kobas

@@ -1,10 +1,9 @@
 #!/bin/bash
 
-mkdir build
-cd build
+mkdir -p ${PREFIX}/bin
 
-cmake ..
-make -j"${CPU_COUNT}"
+# installation
+sh INSTALL
 
-install -d "${PREFIX}/bin"
-install bin/TakeABreak "${PREFIX}/bin/"
+# copy binary
+cp build/bin/TakeABreak ${PREFIX}/bin

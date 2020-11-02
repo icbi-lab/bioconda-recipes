@@ -1,7 +1,9 @@
 #!/bin/bash
+export CFLAGS="-I$PREFIX/include"
+export LDFLAGS="-L$PREFIX/lib"
+export CPATH=${PREFIX}/include
 
-make \
-    CC="${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
-    CXX="${CXX} ${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}"
-install -d "${PREFIX}/bin"
-install agg "${PREFIX}/bin/"
+mkdir -p $PREFIX/bin
+
+make 
+mv agg $PREFIX/bin

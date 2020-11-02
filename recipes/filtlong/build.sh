@@ -1,5 +1,6 @@
 #!/bin/bash
 
-make -j CXXFLAGS="${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}"
-install -d "${PREFIX}/bin"
-install bin/filtlong "${PREFIX}/bin/"
+mkdir -p "$PREFIX/bin"
+
+make -j
+cp bin/filtlong $PREFIX/bin

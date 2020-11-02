@@ -1,49 +1,45 @@
 {% set name = "genomicconsensus" %}
-{% set version = "2.3.3" %}
-{% set sha256 = "6623ada5adaeca8fbf31e6c2c7e483a2eabe717307f86a6b04cb1ac8fbeed9d4" %}
+{% set version = "3.0.2" %}
 
 package:
-  name: {{ name }}
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/PacificBiosciences/GenomicConsensus/releases/download/{{ version }}/GenomicConsensus-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  fn: {{ name|lower }}_{{ version }}.tar.gz
+  url: https://github.com/PacificBiosciences/GenomicConsensus/archive/smrtanalysis-{{ version }}.tar.gz
+  md5: 47bd0ecc00a8cdaf61c4662dfb88fcc7
 
 build:
-  noarch: python
-  number: 1
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
+  skip: True # [not py27]
 
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - python
+    - setuptools
+    - gcc # [not osx]
+    - llvm # [osx]
+    - h5py >=2.0.1
+    - numpy >=1.6.0
+    - python-consensuscore >=1.0.1
+    - pbcommand >=0.3.20
+    - pbcore >=1.2.9
+
   run:
-    - python <3
-    - numpy >=1.16.2
-    - pbcore >=1.6.5
-    - pbcommand >=1.1.1
-    - python-consensuscore >=1.1.1
-    - python-consensuscore2 >=3.4.1
+    - python
+    - libgcc  # [not osx]
+    - h5py >=2.0.1
+    - numpy >=1.6.0
+    - python-consensuscore >=1.0.1
+    - pbcommand >=0.3.20
+    - pbcore >=1.2.9
 
 test:
-  commands:
-    - variantCaller -h
-    - summarizeConsensus -h
-    - gffToVcf -h
-    - gffToBed -h
-    - plurality -h
-    - poa -h
-    - quiver -h
-    - arrow -h
+  imports:
+    - GenomicConsensus.main
+  
 
 about:
-  home: https://github.com/PacificBiosciences/pbbioconda
-  license: BSD-3-Clause-Clear
-  summary: PacBio genomic consensus and variant caller for RSII and Sequel
-
-extra:
-  recipe-maintainers:
-    - pb-dseifert
-    - mhsieh
+  home: https://github.com/PacificBiosciences/GenomicConsensus
+  summary: 'PacBio variant and consensus caller.'
+  license: Redistribution and use in source and binary forms, with or without modification

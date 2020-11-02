@@ -5,9 +5,11 @@ package:
   version: {{ version }}
 
 build:
-  number: 6
+  number: 4
+  string: boost1.61_{{PKG_BUILDNUM}}
 
 source:
+  fn: abyss-{{ version }}.tar.gz
   url: https://github.com/bcgsc/abyss/releases/download/{{ version }}/abyss-{{ version }}.tar.gz
   md5: 10d6d72d1a915e618d41a5cbbcf2364c
   patches:
@@ -15,24 +17,25 @@ source:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-  host:
-    - boost
+    - gcc # [not osx]
+    - llvm # [osx]
+    - boost 1.61.0
     - sparsehash
     - sqlite
     - openmpi
 
   run:
     - bwa
+    - libgcc # [not osx]
     - sqlite
     - make
     - openmpi
 
 test:
   commands:
-    - ABYSS-P --version | grep -q "{{ version }}"
-    - ABYSS --version | grep -q "{{ version }}"
-    - abyss-pe help | grep -q "Assemble reads into contigs and scaffolds"
+    - ABYSS-P --version
+    - ABYSS --version
+    - abyss-pe help
 
 about:
   home: http://www.bcgsc.ca/platform/bioinfo/software/abyss
@@ -44,6 +47,3 @@ extra:
   container:
     # openmpi needs ssh/rsh
     extended-base: true
-  identifiers:
-    - biotools:abyss
-    - doi:10.1101/gr.089532.108

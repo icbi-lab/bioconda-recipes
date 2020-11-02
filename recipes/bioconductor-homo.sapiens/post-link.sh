@@ -1,9 +1,7 @@
 #!/bin/bash
 FN="Homo.sapiens_1.3.1.tar.gz"
 URLS=(
-  "https://bioconductor.org/packages/3.11/data/annotation/src/contrib/Homo.sapiens_1.3.1.tar.gz"
-  "https://bioarchive.galaxyproject.org/Homo.sapiens_1.3.1.tar.gz"
-  "https://depot.galaxyproject.org/software/bioconductor-homo.sapiens/bioconductor-homo.sapiens_1.3.1_src_all.tar.gz"
+  "http://bioconductor.org/packages/3.6/data/annotation/src/contrib/Homo.sapiens_1.3.1.tar.gz"
   "https://depot.galaxyproject.org/software/bioconductor-homo.sapiens/bioconductor-homo.sapiens_1.3.1_src_all.tar.gz"
 )
 MD5="653b60cfcdaefd171729115cd629b585"
@@ -17,7 +15,7 @@ TARBALL=$STAGING/$FN
 
 SUCCESS=0
 for URL in ${URLS[@]}; do
-  curl $URL > $TARBALL
+  wget -O- -q $URL > $TARBALL
   [[ $? == 0 ]] || continue
 
   # Platform-specific md5sum checks.

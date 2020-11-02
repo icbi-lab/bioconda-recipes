@@ -3,24 +3,25 @@ package:
   version: 1.0
 
 source:
+  fn: swiftlink.zip
   url: https://github.com/ajm/swiftlink/archive/master.zip
   md5: b39b35143d5f7d7eb7a3c9ce8fd8ba65
   patches:
     - osx-makefile.patch # [osx]
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-  host:
-    - gsl
+    - gcc
+    - gsl {{ CONDA_GSL }}*
     - openblas
     - openmp
+
   run:
-    - gsl
+    - libgcc
+    - gsl {{ CONDA_GSL }}*
     - openblas
     - openmp
 

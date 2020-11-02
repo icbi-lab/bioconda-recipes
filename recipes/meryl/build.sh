@@ -1,16 +1,13 @@
-#!/bin/bash
+make install
 
-pushd src
-env -u PREFIX make
-popd
-
-mkdir -p $PREFIX/bin
-
+mkdir -p $PREFIX
 if [ `uname` == Darwin ]; then
     cp Darwin-amd64/bin/* $PREFIX/bin/
+    cp Darwin-amd64/include/* $PREFIX/include/
     cp Darwin-amd64/lib/* $PREFIX/lib/
 else
     cp Linux-amd64/bin/* $PREFIX/bin/
+    cp Linux-amd64/include/* $PREFIX/include/
     cp Linux-amd64/lib/* $PREFIX/lib/
 fi
 

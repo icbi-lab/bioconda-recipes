@@ -1,10 +1,5 @@
 grep -l -r "/usr/bin/perl" . | xargs sed -i.bak -e 's/usr\/bin\/perl/usr\/bin\/env perl/g'
-make \
-    CC="${CC} ${CFLAGS} ${CPPFLAGS}" \
-    CXX="${CXX} ${CXXFLAGS} ${CPPFLAGS} -std=c++03" \
-    CLDFLAGS="${LDFLAGS}" \
-    CXXLDFLAGS="${LDFLAGS}" \
-    install
+make install
 
 mkdir -p $PREFIX
 

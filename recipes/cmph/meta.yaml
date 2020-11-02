@@ -3,11 +3,12 @@
 {% set md5 = "020946deef7418d9daf4195556ecac12" %}
 
 source:
+  fn: {{ name }}-{{ version }}.tar.gz
   md5: {{ md5 }}
   url: https://downloads.sourceforge.net/project/cmph/cmph/cmph-2.0.tar.gz
 
 build:
-  number: 2
+  number: 0
   skip: False
 
 package:
@@ -16,14 +17,15 @@ package:
 
 requirements:
   build:
-    - {{ compiler('c') }}
+      - llvm # [osx]
+      - gcc # [linux]
   run:
+      - libgcc # [linux]
 
 test:
   commands:
-    - cmph -h
+      - cmph -h
 
 about:
-  home: 'http://cmph.sourceforge.net/'
-  summary: "CMPH - C Minimal Perfect Hashing Library"
-  license: LGPL and the MPL 1.1
+    home: 'http://cmph.sourceforge.net/'
+    summary: "CMPH - C Minimal Perfect Hashing Library"

@@ -1,70 +1,55 @@
-{% set name = "bx-python" %}
-{% set version = "0.8.9" %}
-{% set file_ext = "tar.gz" %}
-{% set hash_type = "sha256" %}
-{% set hash_value = "7a6c8d41daf81c92601f00c0065c1b018a0b4e349abf78d662d4191a51ac8588" %}
+{% set version = "0.7.4" %}
 
 package:
-  name: '{{ name|lower }}'
-  version: '{{ version }}'
+  name: bx-python
+  version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
-  '{{ hash_type }}': '{{ hash_value }}'
+  url: https://github.com/bxlab/bx-python/archive/v{{ version }}.tar.gz
+  sha256: 1066d1e56d062d0661f23c19942eb757bd7ab7cb8bc7d89a72fdc3931c995cb4
 
 build:
-  number: 2
-  script: "{{ PYTHON }} -m pip install --no-deps --ignore-installed --no-cache-dir -vvv ."
+  number: 0
+  skip: True # [not py27]
 
 requirements:
   build:
-    - {{ compiler('c') }}
-  host:
-    - cython
-    - numpy
-    - pip
     - python
-    - python-lzo
     - setuptools
-    - six >=1.13.0
-    - zlib
+    - cython
+    - nose
+    - numpy x.x
+    - gcc
+
   run:
-    - numpy
     - python
-    - python-lzo
-    - six >=1.13.0
+    - numpy x.x
+    - libgcc
 
 test:
   imports:
-    - bx
-    - bx.align
     - bx.align.sitemask
-    - bx.align.tools
-    - bx.arrays
-    - bx.bbi
-    - bx.cookbook
+    - bx.tabular
     - bx.intervals
+    - bx.align
+    - bx.bbi
+    - bx.bbi.bigwig_file
+    - bx.cookbook
+    - bx.arrays
+    - bx.motif.io
+    - bx.seq
     - bx.intervals.operations
-    - bx.intseq
+    - bx.pwm
     - bx.misc
     - bx.motif
-    - bx.motif.io
-    - bx.motif.logo
     - bx.phylo
-    - bx.pwm
-    - bx.seq
-    - bx.tabular
+    - bx.motif.logo
     - bx_extras
-  requires:
-    - nose
+    - bx.align.tools
+    - bx
+    - bx.intseq
 
 about:
   home: https://github.com/bxlab/bx-python
   license: MIT
-  license_family: MIT
-  license_file: 'LICENSE'
-  summary: Tools for manipulating biological data, particularly multiple sequence alignments
-
-extra:
-  container:
-    extended-base: true
+  summary: Toolkit to enable rapid implementation of genome scale analyses.

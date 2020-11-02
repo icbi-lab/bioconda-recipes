@@ -1,27 +1,34 @@
-{% set version = "1.15.0" %}
+{% set version = "1.2.2" %}
 
 package:
   name: nanoget
   version: {{ version }}
 
 source:
+  fn: nanoget-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/n/nanoget/nanoget-{{ version }}.tar.gz
-  sha256: f6993855d5f1aa1e9271c61e39184b22fccd6a90e634ca88d2684ff85c8c22e5
+  sha256: 4a90fbfadbd8e05ded426dd86168e0e04859a3a20cc22b10f583dfd07e9006bb
 
 build:
   number: 0
-  noarch: python
+  skip: True  # [py27]
 
 requirements:
-  host:
-    - python >=3
+  build:
+    - python
     - setuptools
-  run:
-    - python >=3
-    - pandas >=0.22.0
+    - pandas
     - numpy
     - biopython
-    - pysam >0.10.0
+    - pysam >0.10.0.0
+    - nanomath
+
+  run:
+    - python
+    - pandas
+    - numpy
+    - biopython
+    - pysam >0.10.0.0
     - nanomath
 
 test:
@@ -30,6 +37,6 @@ test:
 
 about:
   home: https://github.com/wdecoster/nanoget
-  license: GPL-3.0-only
+  license: MIT License
   summary: 'Functions to extract information from Oxford Nanopore sequencing data and alignments.'
-  license_family: GPL
+  license_family: MIT

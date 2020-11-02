@@ -1,24 +1,20 @@
 #!/bin/bash
 
-case `uname` in
-Darwin) SUF=.mac;;
-Linux) SUF=.gcc;;
-*) echo "Unknown architecture"; exit 1;;
-esac
+make -f Makefile.PTHREADS.gcc
+make -f Makefile.gcc
+
+make -f Makefile.SSE3.gcc
+make -f Makefile.SSE3.PTHREADS.gcc
+
+make -f Makefile.AVX2.gcc
+make -f Makefile.AVX2.PTHREADS.gcc
 
 mkdir -p $PREFIX/bin
 
-for PTHREADS in "" .PTHREADS; do
-  for OPT in "" .SSE3 .AVX2; do
-    echo "######## Building Flags opt=$OPT pthread=$PTHREADS os=$SUF ######"
-    MAKEFILE=Makefile${OPT}${PTHREADS}
-    if [ -e ${MAKEFILE}${SUF} ]; then
-      MAKEFILE=${MAKEFILE}$SUF
-    else
-      MAKEFILE=${MAKEFILE}.gcc
-    fi
-    make -f ${MAKEFILE} CC=$CC
-    mv raxmlHPC* $PREFIX/bin
-    make -f ${MAKEFILE} clean
-  done
-done
+cp raxmlHPC-PTHREADS $PREFIX/bin
+cp raxmlHPC $PREFIX/bin
+cp raxmlHPC-PTHREADS-SSE3 $PREFIX/bin
+cp raxmlHPC-SSE3 $PREFIX/bin
+cp raxmlHPC-PTHREADS-AVX2 $PREFIX/bin
+cp raxmlHPC-AVX2 $PREFIX/bin
+

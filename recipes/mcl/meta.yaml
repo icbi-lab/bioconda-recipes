@@ -3,51 +3,32 @@ package:
   version: "14.137"
 
 build:
-  number: 5
+  number: 2
 
 source:
+  fn: mcl-14-137.tar.gz
   url: http://micans.org/mcl/src/mcl-14-137.tar.gz
-  sha256: b5786897a8a8ca119eb355a5630806a4da72ea84243dba85b19a86f14757b497
+  md5: bc8740456cf51019d0a9ac5eba665bb5
   patches:
     - mcl.patch
 
 requirements:
   build:
-    - {{ compiler('c') }}
-
-
-  host:
-    - perl
+    - gcc   # [not osx]
+    - llvm  # [osx]
 
   run:
-    - perl
-    - blast
+    - libgcc    # [not osx]
+    - perl-threaded
 
 test:
   commands:
-    - clm -h
-    - clmformat --version
-    - clxdo -h
-    - mcl --help
-    - mclblastline
-    - mclcm --version
-    - mclpipeline
-    - mcx -h
-    - mcxarray --version
-    - mcxassemble --version
-    - mcxdeblast -h
-    - mcxdump --version
-    - mcxi -h
-    - mcxload --version
-    - mcxmap --version
-    - mcxrand --version
-    - mcxsubs --version
-
-
-
+    - mcl 2>&1 | grep usage > /dev/null
+    - mcxdeblast --help
 
 about:
   home: http://micans.org/mcl/
   license: GPL3
   license_file: LICENSE
   summary: MCL - a cluster algorithm for graphs
+

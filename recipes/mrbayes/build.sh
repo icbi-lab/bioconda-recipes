@@ -1,12 +1,15 @@
 #!/bin/bash
 set -x
 
+cd src
+autoconf
+
 # build version with MPI & Beagle
 ./configure \
     --prefix=$PREFIX \
     --disable-debug \
     --with-beagle=$PREFIX \
-    --with-mpi
+    --enable-mpi
 
 make -j$CPU_COUNT
 make install

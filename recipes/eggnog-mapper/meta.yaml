@@ -1,49 +1,37 @@
-{% set name = "eggNOG-mapper" %}
-{% set version = "2.0.1" %}
+{% set version = "1.0.3" %}
 
 package:
-  name: {{ name|lower }}
+  name: eggnog-mapper
   version: {{ version }}
 
 source:
+  fn: {{ version }}.tar.gz
   url: https://github.com/jhcepas/eggnog-mapper/archive/{{ version }}.tar.gz
-  sha256: 576845a6a4395425e12e60a150d1e3ec7b5e6ea90414441e39f2157f3c2d0dd2
+  md5: 02aba54c61aae108d5a8ab91e36785b2
+  patches:
+    - setup.patch
 
 build:
-  number: 1
-  noarch: python
-  script: python -m pip install --no-deps --ignore-installed --no-cache-dir -vvv .
+  number: 0
+  skip: True # [not py27]
 
 requirements:
-  host:
-    - pip
-    - python <3
+  build:
+    - python
+    - setuptools
+
   run:
-    - python <3
+    - python
     - biopython
-    - diamond >0.9
-    - wget
+    - diamond 0.8.22
+    - hmmer 3.1b2
 
 test:
   commands:
-    - emapper.py --help
-    - download_eggnog_data.py --help
-    - download_eggnog_data.py -sfy
-  imports:
-    - eggnogmapper
+    - 'emapper.py -h'
+    - 'download_eggnog_data.py bact -sfy'
 
 about:
   home: https://github.com/jhcepas/eggnog-mapper
-  license: GPL-2.0
-  license_family: GPL
-  license_file: LICENSE
-  summary: "Fast genome-wide functional annotation through orthology assignment."
-  doc_url: https://github.com/eggnogdb/eggnog-mapper/wiki
-
-extra:
-  container:
-    # need wget with more options than the busybox one
-    extended-base: True
-  identifiers:
-    - doi:10.1093/nar/gky1085
-    - usegalaxy-eu:eggnog_mapper
+  license: GPL
+  summary: Fast genome-wide functional annotation through orthology assignment

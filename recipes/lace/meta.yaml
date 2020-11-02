@@ -6,9 +6,10 @@ package:
   version: {{ version }}
 
 build:
-  number: 2
+  number: 0
 
 source:
+  fn: {{ name|lower }}_{{ version }}.tar.gz
   url: https://github.com/Oshlack/Lace/archive/v{{ version }}.tar.gz
   md5: e5d93919b0b4eb3e3eebd7246b1cad3a
   patches:
@@ -16,9 +17,11 @@ source:
 
 requirements:
   build:
-  - {{ compiler('c') }}
+  - gcc  # [not osx]
+  - llvm  # [osx]
 
   run:
+  - libgcc  # [not osx]
   - python
   - pandas
   - networkx

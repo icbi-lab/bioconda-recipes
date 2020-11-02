@@ -1,29 +1,20 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-export BOOST_ROOT="${PREFIX}"
-export PKG_CONFIG_LIBDIR="${PREFIX}"/lib/pkgconfig
+mkdir -p $PREFIX/bin
 
-# HDF5 doesn't have pkgconfig files yet
-export CPPFLAGS+=" -isystem ${PREFIX}/include"
-export LDFLAGS+=" -L${PREFIX}/lib -lhdf5_cpp -lhdf5"
+export HDF5_INCLUDE=$PREFIX/include
+export HDF5_LIB=$PREFIX/lib
 
-# required for Meson's sanity check
-export LD_LIBRARY_PATH="${PREFIX}/lib"
-export DYLD_FALLBACK_LIBRARY_PATH="${PREFIX}/lib"
+./configure.py CXXFLAGS=-O3 --shared --sub --no-pbbam
+make configure-submodule
+make build-submodule
+make
 
-# configure
-# '--wrap-mode nofallback' prevents meson from downloading
-# stuff from the internet or using subprojects.
-meson \
-  --default-library static \
-  --libdir lib \
-  --wrap-mode nofallback \
-  --prefix "${PREFIX}" \
-  -Dtests=false \
-  build .
-
-# build
-ninja -C build -v
-
-# install
-ninja -C build -v install
+cp blasr $PREFIX/bin
+cp utils/loadPulses $PREFIX/bin
+cp utils/pls2fasta $PREFIX/bin
+cp utils/samtoh5 $PREFIX/bin
+cp utils/samtom4 $PREFIX/bin
+cp utils/samFilter $PREFIX/bin
+cp utils/sawriter $PREFIX/bin
+cp utils/sdpMatcher  $PREFIX/bin

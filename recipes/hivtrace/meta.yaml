@@ -1,32 +1,36 @@
-{% set name = "hivtrace" %}
-{% set version = "1.5.0" %}
-{% set sha256 = "fc18d3e446f80294d91b3933a9feb934d080e179fb7204600d261bab1b9ef245" %}
-
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: hivtrace
+  version: 0.1.6
 
 source:
-  url: https://github.com/veg/hivtrace/archive/{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  git_rev: 0.1.6
+  git_url: https://github.com/veg/hivtrace.git
+  patches:
+    - dependency_links.patch
 
 build:
-  noarch: python
   number: 0
-  script: "{{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv"
+  skip: True # [py27]
 
 requirements:
-  host:
-    - python >=3
-    - pip
-  run:
-    - python >=3
+  build:
+    - python
+    - setuptools
     - biopython >=1.58
-    - python-bioext >=0.19.7
-    - python-hyphy-python >=0.1.6
-    - python-hppy >=0.9.8
+    - python-bioext >=0.17.4
+    - python-hyphy-python >=0.1.1
+    - python-hppy >=0.9.6
     - tornado >=4.3
-    - python-hivclustering
+    - python-hivclustering >=1.2.0
+
+  run:
+    - python
+    - biopython >=1.58
+    - python-bioext >=0.17.4
+    - python-hyphy-python >=0.1.1
+    - python-hppy >=0.9.6
+    - tornado >=4.3
+    - python-hivclustering >=1.2.0
 
 test:
   commands:
@@ -38,4 +42,3 @@ about:
   home: https://github.com/veg/hivtrace
   license: MIT
   summary: 'HIV TRACE is an application that identifies potential transmission clusters within a supplied FASTA file with an option to find potential links against the Los Alamos HIV Sequence Database.'
-  dev_url: https://github.com/veg/hivtrace

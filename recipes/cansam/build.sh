@@ -1,3 +1,6 @@
 #!/bin/bash
 
-make -e CXXFLAGS+=-I. install prefix="${PREFIX}"
+make
+cp sam* $PREFIX/bin && \
+cp libcansam.a $PREFIX/lib
+cp -a cansam $PREFIX/include

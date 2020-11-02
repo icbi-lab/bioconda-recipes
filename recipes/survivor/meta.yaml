@@ -1,4 +1,4 @@
-{% set version = "1.0.7" %}
+{% set version = "1.0.0" %}
 
 package:
   name: survivor
@@ -6,23 +6,22 @@ package:
 
 build:
   number: 0
+  skip: True # [osx]
 
 source:
-  url: https://github.com/fritzsedlazeck/SURVIVOR/archive/{{ version }}.tar.gz
-  sha256: d65b52d4317d9fb41e13b687b1feadaf40cc397637816e80cb16ce8defc832be
+  fn: survivor-{{ version }}.tar.gz
+  url: https://github.com/fritzsedlazeck/SURVIVOR/archive/v{{ version }}.tar.gz
+  md5: 1387f5f13e0c3ad83b53c52d3b380d4a
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-  host:
-    - zlib
+  - gcc  # [not osx]
   run:
-    - zlib
+  - libgcc # [not osx]
 
 about:
   home: https://github.com/fritzsedlazeck/SURVIVOR
   license: MIT
-  license_file: LICENSE
   summary: Toolset for SV simulation, comparison and filtering
 
 test:

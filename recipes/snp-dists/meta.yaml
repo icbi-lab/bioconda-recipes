@@ -1,34 +1,36 @@
-{% set version = "0.7.0" %}
-{% set sha256 = "9f5ae3c48f7c6c59b3132c445fbd6ea9269896a4c588171624adb1a7bb016b57" %}
+{% set name = "snp-dists" %}
+{% set version = "0.2" %}
 
 package:
-    name: snp-dists
-    version: {{ version }}
+  name: {{ name }}
+  version: {{ version }}
 
 build:
-    number: 0
+  number: 0
 
 source:
-    url: https://github.com/tseemann/snp-dists/archive/v{{ version }}.tar.gz
-    sha256: {{ sha256 }}
-    patches:
-      - 0001-Makefile-append-CFLAGS-LIBS.patch
+  fn: {{ name }}_v{{ version }}.tar.gz
+  url: https://github.com/tseemann/{{ name }}/archive/v{{ version }}.tar.gz
+  md5: dc986abdb732b2d2e770817965e032d0
 
 requirements:
-    build:
-        - {{ compiler('c') }}
-    host:
-        - zlib
-    run:
-        - zlib
+
+  build:
+  - gcc # [linux]
+  - llvm # [osx]
+  - zlib {{CONDA_ZLIB}}*
+
+  run:
+  - libgcc # [linux]
+  - zlib {{CONDA_ZLIB}}*
 
 test:
-    commands:
-        - snp-dists -h
-        - snp-dists -v | grep -F '{{ version }}'
+  commands:
+    - snp-dists -h
+    - snp-dists -v
 
 about:
-    home: https://github.com/tseemann/snp-dists
-    license: GPL3
-    license_file: LICENSE
-    summary: Convert a FASTA alignment to SNP distance matrix
+  home: https://github.com/tseemann/snp-dists
+  license: GPL3
+  license_file: LICENSE
+  summary: Convert a FASTA alignment to SNP distance matrix

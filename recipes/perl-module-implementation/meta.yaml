@@ -1,37 +1,30 @@
-{% set name = "perl-module-implementation" %}
-{% set version = "0.09" %}
-{% set sha256 = "c15f1a12f0c2130c9efff3c2e1afe5887b08ccd033bd132186d1e7d5087fd66d" %}
-
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: perl-module-implementation
+  version: "0.09"
 
 source:
-  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Module-Implementation-0.09.tar.gz
-  sha256: {{ sha256 }}
+  fn: Module-Implementation-0.09.tar.gz
+  url: http://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Module-Implementation-0.09.tar.gz
+  md5: 52e3fe0ca6b1eff0488d59b7aacc0667
 
 build:
-  noarch: generic
-  number: 2
+  number: 0
 
 requirements:
-  host:
-    - perl
-    - perl-lib
-    - perl-try-tiny
+  build:
+    - perl-threaded
+    - perl-test-requires
     - perl-module-runtime
     - perl-test-fatal
-    - perl-carp
-    - perl-extutils-makemaker
-    - perl-test-requires
+    - perl-try-tiny
 
   run:
-    - perl
-    - perl-carp
-    - perl-try-tiny
+    - perl-threaded
     - perl-module-runtime
+    - perl-try-tiny
 
 test:
+  # Perl 'use' tests
   imports:
     - Module::Implementation
 

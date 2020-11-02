@@ -1,6 +1,8 @@
 #!/bin/bash
-# builds binary modules: ragout-maf2synteny ragout-overlap
-python setup.py build
+# creates executables in ./lib/ : ragout-maf2synteny ragout-overlap
+make
 
-#installs ragout as a python pachage
-$PYTHON setup.py install --single-version-externally-managed --record record.txt
+cp ragout.py $PREFIX/bin/
+cp -r ragout $PREFIX/bin/
+# copy executables created in ./lib/ to $PREFIX/bin so ragout can find them
+cp -r ./lib/ragout-* $PREFIX/bin/

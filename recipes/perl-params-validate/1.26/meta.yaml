@@ -7,12 +7,12 @@ package:
   version: {{ version }}
 
 source:
+  fn: Params-Validate-1.26.tar.gz
   url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Params-Validate-1.26.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  noarch: generic
-  number: 1
+  number: 0
 
 requirements:
   build:
@@ -26,6 +26,7 @@ requirements:
 
   run:
     - perl
+    - libgcc
     - perl-module-implementation
     - perl-xsloader
 

@@ -1,26 +1,27 @@
 {% set name = "gfapy" %}
-{% set version = "1.1.0" %}
-{% set sha256hash = "8693ae2212e5ecfad6855735057c0bcd62909a3695c7c82f9ad054048d30f84a" %}
+{% set version = "1.0.0" %}
+{% set sha256hash = "fe4ce37aae7e520eb35d9953fbc8b9a3f32adf3c0bd402e99a8dac60d2d1f339" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
+  fn: gfapy-{{ version }}.tar.gz
   url: https://github.com/ggonnella/gfapy/archive/{{ version }}.tar.gz
   sha256: {{ sha256hash }}
 
 build:
-  noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
+  skip: True  # [py2k] 
 
 requirements:
-  host:
-    - python >=3
-    - pip
+  build:
+    - python
+    - setuptools
+
   run:
-    - python >=3
+    - python
 
 test:
   # Python imports
@@ -51,6 +52,7 @@ test:
     - gfapy.line.unknown
     - gfapy.lines
     - tests
+
   requires:
     - nose
 
@@ -59,3 +61,4 @@ about:
   license: ISC License (ISCL)
   summary: 'Library for handling data in the GFA1 and GFA2 formats'
   license_family: Other
+

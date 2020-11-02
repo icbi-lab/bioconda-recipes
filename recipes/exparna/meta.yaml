@@ -3,7 +3,7 @@ package:
   version: 1.0.1
 
 build:
-  number: 3
+  number: 0
   skip: True # [osx]
 
 source:
@@ -12,13 +12,15 @@ source:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
+    - gcc   # [not osx]
+    - llvm  # [osx]
     - automake
     - autoconf
-  host:
-    - perl
+    - perl-threaded
     - viennarna
+
   run:
+    - libgcc    # [not osx]
     - viennarna
 
 test:
@@ -30,7 +32,3 @@ about:
   license: GPL-2.0
   license_file: LICENSE
   summary: The program finds the longest common subsequence of exact pattern matches (LCS-EPM)
-
-extra:
-  identifiers:
-    - biotools:exparna

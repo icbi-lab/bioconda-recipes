@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -eu -o pipefail
-
 cd $SRC_DIR/
 
 PKG_BINARY=ua

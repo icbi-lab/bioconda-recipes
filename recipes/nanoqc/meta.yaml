@@ -1,25 +1,30 @@
-{% set version = "0.9.4" %}
+{% set version = "0.6.0" %}
 
 package:
   name: nanoqc
   version: {{ version }}
 
 source:
+  fn: nanoQC-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/n/nanoqc/nanoQC-{{ version }}.tar.gz
-  sha256: 05685656138cbaf099b18831d1ceeaca93faf3399881cc2efda44c04d3b316e3
+  sha256: 82e67c93f26ecca41806be7b9ad4e3cfec2aad5f5f4fe450a1b772420db221f9
 
 build:
   entry_points:
     - nanoQC=nanoQC.nanoQC:main
   number: 0
-  noarch: python
+  skip: True  # [py27]
 
 requirements:
-  host:
-    - python >=3
+  build:
+    - python
     - setuptools
+    - bokeh
+    - numpy
+    - biopython
+
   run:
-    - python >=3
+    - python
     - bokeh
     - numpy
     - biopython
@@ -36,3 +41,4 @@ about:
   license: MIT License
   summary: 'Create fastQC-like plots for Oxford Nanopore sequencing data'
   license_family: MIT
+

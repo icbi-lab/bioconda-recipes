@@ -3,20 +3,21 @@ package:
   version: "0.3.1"
 
 source:
+  fn: esmre-0.3.1.tar.gz
   url: https://pypi.python.org/packages/source/e/esmre/esmre-0.3.1.tar.gz
   md5: 95ace12bac0c79cf95712336489bc4a4
 
 build:
-  noarch: python
-  number: 1
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
+  number: 0
+  skip: True # [not py27 or osx]
 
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - python
+    - setuptools
+
   run:
-    - python <3
+    - python
 
 test:
   imports:

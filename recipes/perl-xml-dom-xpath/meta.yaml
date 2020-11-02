@@ -3,23 +3,21 @@ package:
   version: "0.14"
 
 source:
+  fn: XML-DOM-XPath-0.14.tar.gz
   url: http://cpan.metacpan.org/authors/id/M/MI/MIROD/XML-DOM-XPath-0.14.tar.gz
-  patches:
-      - utf8.patch
   md5: 51a40df96c2f92829e1a4f84782fa75e
 
 build:
-  noarch: generic
-  number: 1
+  number: 0
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
     - perl-xml-dom
     - perl-xml-xpathengine
 
   run:
-    - perl
+    - perl-threaded
     - perl-xml-dom
     - perl-xml-xpathengine
 

@@ -7,24 +7,32 @@ package:
   version: {{ version }}
 
 source:
+  fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/nickp60/SIS/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  noarch: python
-  number: 3
-
+  number: 1
+  skip: yes [py2k]
 requirements:
-  host:
-    - python >=3
-    - pip
+  build:
+    - mummer
+    - perl
+    - python
   run:
     - mummer
-    - python >=3
+    - perl
+    - python
 
 test:
+  # copying files does not work properly on travis
+  # source_files:
+  #   - examples/nucmer.coords
+  # commands:
+  #    - sis.py examples/nucmer.coords
   imports:
-    - scaffoldsis
+     - scaffoldsis
+  
 
 about:
   home: http://marte.ic.unicamp.br:8747/

@@ -3,19 +3,19 @@ package:
   version: "1.02"
 
 source:
+  fn: Statistics-Distributions-1.02.tar.gz
   url: http://cpan.metacpan.org/authors/id/M/MI/MIKEK/Statistics-Distributions-1.02.tar.gz
   md5: 526cb415b30ffeec52563dbcb436ca60
 
 build:
-  noarch: generic
-  number: 1
+  number: 0
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
 
   run:
-    - perl
+    - perl-threaded
 
 test:
   # Perl 'use' tests

@@ -1,10 +1,8 @@
 #!/bin/bash
 
-mkdir build
-cd build
-cmake \
-    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-    -DHDF5_ROOT="${PREFIX}/include" \
-    ../src
+mkdir -p $PREFIX/bin
+
+mkdir build && cd build
+cmake ../src -DCMAKE_INSTALL_PREFIX=$PREFIX  -DHDF5_ROOT=$PREFIX/include
 make
 make install

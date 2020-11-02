@@ -1,31 +1,44 @@
-{% set version = "1.7" %}
-{% set sha256 = "02cfde4f6aca6f7453edb93ba70d36d08081f5ebad8b023188da6379ff1d4a75" %}
-
 package:
   name: perl-bloom-faster
-  version: {{ version }}
+  version: "1.7"
 
 source:
-  url: http://cpan.metacpan.org/authors/id/P/PA/PALVARO/Bloom-Faster-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  fn: Bloom-Faster-1.7.tar.gz
+  url: http://cpan.metacpan.org/authors/id/P/PA/PALVARO/Bloom-Faster-1.7.tar.gz
+  md5: 6d0d26512f4e8e8f9df0523115a60092
+#  patches:
+   # List any patch files here
+   # - fix.patch
 
 build:
-  number: 2
+  skip: False
+  # number: 1
 
 requirements:
   build:
-    - {{ compiler('c') }}
-  host:
-    - perl
+    - gcc
+    - perl-threaded
 
   run:
-    - perl
+    - libgcc
+    - perl-threaded
 
 test:
-  imports:
-    - Bloom::Faster
+  # Perl 'use' tests
+  # imports:
+
+  # You can also put a file called run_test.pl (or run_test.py) in the recipe
+  # that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.  For example
+    # - nose
 
 about:
   home: http://metacpan.org/pod/Bloom-Faster
   license: unknown
   summary: 'Perl extension for the c library libbloom.'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml

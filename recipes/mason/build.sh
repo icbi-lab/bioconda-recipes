@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $SRC_DIR/bin
+
 binaries="\
 mason_frag_sequencing \
 mason_genome \
@@ -11,4 +13,4 @@ mason_variator \
 "
 mkdir -p $PREFIX/bin
 
-for i in $binaries; do cp bin/$i $PREFIX/bin/$i && chmod a+x $PREFIX/bin/$i; done
+for i in $binaries; do cp $SRC_DIR/bin/$i $PREFIX/bin/$i && chmod a+x $PREFIX/bin/$i; done

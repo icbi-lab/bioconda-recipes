@@ -3,26 +3,25 @@ package:
   version: "1.43"
 
 source:
+  fn: Bio-SamTools-1.43.tar.gz
   url: 'http://www.cpan.org/authors/id/L/LD/LDS/Bio-SamTools-1.43.tar.gz'
   md5: d36d7bfe91d6eaa8d220a2cb08d04a94
   patches:
     - build-pl.patch
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
-    - {{ compiler('c') }}
-  host:
-    - perl
+    - perl-threaded
     - perl-bioperl-core
     - perl-module-build
     - samtools <=0.1.17
     - zlib
 
   run:
-    - perl
+    - perl-threaded
     - perl-bioperl-core
     - zlib
 

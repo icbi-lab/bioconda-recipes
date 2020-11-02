@@ -1,6 +1,8 @@
 #!/bin/bash
 set -eu -o pipefail
-make all CC=$CC CXX=$CXX SFLAGS=
-make install_all
+unset CFLAGS
+unset CXXFLAGS
+make SFLAGS=
+make install
 mkdir -p $PREFIX/bin
 cp bin/* $PREFIX/bin

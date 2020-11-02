@@ -1,43 +1,32 @@
-{% set version = "2.4.15" %}
-{% set sha256 = "9ae7614586941ff3471596eade743bd2ec416b2d5c185f35ef93b9845c761d10" %}
-
 package:
   name: viennarna
-  version: {{ version }}
+  version: 2.4.3
 
 build:
   number: 0
-  run_exports:
-    # Ronny said VRNA is stable in x.x releases
-    - {{ pin_subpackage('viennarna', max_pin='x.x') }}
 
 source:
-  url: https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_4_x/ViennaRNA-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
-
+  fn: ViennaRNA-2.4.3.tar.gz
+  url: https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_4_x/ViennaRNA-2.4.3.tar.gz
+  sha256: 4cda6e22029b34bb9f5375181562f69e4a780a89ead50fe952891835e9933ac0
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-  host:
-    - pkgconfig ## needed for viennarna version checks in dependent packages
+    - gcc   # [linux]
+    - llvm  # [osx]
     - perl
-    - python
-    - zlib
-    - llvm-openmp # [osx]
+    - python >3 # [linux]
   run:
-    - python
-    - llvm-openmp # [osx]
+    - libgcc # [linux]
 
 test:
   commands:
-    - RNAalifold --version
-    - RNAeval    --version
-    - RNAfold    --version
-    - RNAplfold  --version
-    - RNAsubopt  --version
-    - RNAlocmin  --version
-    - kinwalker  --help >& /dev/null
+   - RNAalifold --version
+   - RNAeval    --version
+   - RNAfold    --version
+   - RNAplfold  --version
+   - RNAsubopt  --version
+   - RNAlocmin  --version
+   - kinwalker  --help >& /dev/null
 
 about:
   home: http://www.tbi.univie.ac.at/RNA/

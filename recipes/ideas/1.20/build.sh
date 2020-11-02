@@ -1,9 +1,10 @@
 #!/bin/bash
 
-install -d "${PREFIX}/bin"
+mkdir -p $PREFIX/bin
 # Copy the precompiled ideas binary.
-install ./bin/linux/ideas "${PREFIX}/bin/"
+cp ./bin/linux/ideas $PREFIX/bin
+chmod +x $PREFIX/bin/ideas
 # Compile and install prepMat from source.
-"${CXX}" ${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS} \
-    ./src/prepareMatrix.cpp \
-    -o "${PREFIX}/bin/prepMat"
+cd ./src
+make -f makefile
+cp ./prepMat $PREFIX/bin

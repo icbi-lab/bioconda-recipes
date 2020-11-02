@@ -1,4 +1,4 @@
-{% set version = "0.50.2" %}
+{% set version = "0.46" %}
 
 package:
   name: combined-pvalues
@@ -6,19 +6,19 @@ package:
 
 source:
   url: https://github.com/brentp/combined-pvalues/archive/v{{ version }}.tar.gz
-  sha256: 8cebcf6d4a327e86149255d3a09c95c8e320e8371e6685eebbe6ef5b90c3693e
+  md5: 807d3adb4bc8d61a0e7dbe7248b202cd
 
 build:
-  noarch: python
-  number: 0
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
+  skip: True # [not py27]
 
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - python
+    - setuptools
+    - ez_setup
+    - interlap
   run:
-    - python <3
+    - python
     - numpy
     - scipy
     - toolshed

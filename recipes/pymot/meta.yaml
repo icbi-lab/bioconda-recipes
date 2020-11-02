@@ -5,19 +5,20 @@ package:
   version: {{ PYMOT_VERSION }}
 
 source:
+  fn: pymot-master.zip
   url: https://github.com/Videmo/pymot/archive/master.zip
   md5: 3641a81623d0bd37689abe69fd9ed924
 
 build:
-  noarch: python
-  number: 2
+  number: 0
+  skip: True  # [py3k]
 
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - setuptools
+    - python
   run:
-    - python <3
+    - python
     - munkres
 
 test:

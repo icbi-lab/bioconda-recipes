@@ -4,19 +4,19 @@ package:
 
 source:
   url: https://pypi.python.org/packages/source/k/kid/kid-0.9.6.tar.gz
+  fn: kid-0.9.6.tar.gz
   md5: 4233e592eee906039ad3dcbedbf6e972
 
 build:
-  noarch: python
-  number: 2
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
+  number: 1
+  skip: True  # [not py27 or osx]
 
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - python
+
   run:
-    - python <3
+    - python
 
 test:
   imports:

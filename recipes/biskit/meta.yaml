@@ -1,27 +1,30 @@
 {% set name = "biskit" %}
-{% set version = "2.5.1" %}
+{% set version = "2.4.3" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "def51141c1037d86818e30ad904487cdfcdeaca726a97f5cb58da3a7d5ac5d57" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/graik/biskit/archive/v{{ version }}.tar.gz
-  sha256: 92da47ead741143013324854ccfa2c1439592c6710384263104b2625adf07e90
-  patches:
-    - patch
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  {{ hash_type }}: {{ hash_value }}
 
 build:
-  noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
-
+  skip: True # [not py27]
+  
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - python
+    - setuptools
+    - numpy
+    - scipy
+    - biopython
   run:
-    - python <3
+    - python
     - numpy
     - scipy
     - biopython
@@ -29,7 +32,7 @@ requirements:
 test:
   imports:
     - Biskit
-
+    
 about:
   home: http://biskit.pasteur.fr
   license: GNU General Public License (GPL)

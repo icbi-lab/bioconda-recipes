@@ -1,5 +1,5 @@
 #!/bin/bash
 
+mkdir -p ${PREFIX}/bin
 make
-install -d "${PREFIX}/bin"
-install bin/peakranger "${PREFIX}/bin/"
+cp bin/peakranger ${PREFIX}/bin

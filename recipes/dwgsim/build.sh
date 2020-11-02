@@ -2,11 +2,12 @@
 
 set -x -e -o pipefail
 
-make \
-  CC="${CC}" \
-  CFLAGS="${CPPFLAGS} ${CFLAGS} -g -Wall -O3 ${LDFLAGS}" \
-  LIBCURSES=-lncurses
+(git clone http://github.com/samtools/samtools && cd samtools && git checkout 28391e5898804ce6b805016)
 
-mkdir -p "${PREFIX}/bin"
+make LIBCURSES=-lncurses
 
-cp dwgsim dwgsim_eval "${PREFIX}/bin/"
+mkdir -p $PREFIX/bin
+
+cp dwgsim $PREFIX/bin
+cp dwgsim_eval $PREFIX/bin
+

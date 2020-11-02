@@ -1,18 +1,18 @@
 package:
   name: perl-test-most
-  version: "0.35"
+  version: "0.34"
 
 source:
-  url: http://cpan.metacpan.org/authors/id/O/OV/OVID/Test-Most-0.35.tar.gz
-  sha256: 9897a6f4d751598d2ed1047e01c1554b01d0f8c96c45e7e845229782bf6f657f
+  fn: Test-Most-0.34.tar.gz
+  url: http://cpan.metacpan.org/authors/id/O/OV/OVID/Test-Most-0.34.tar.gz
+  md5: 6fa1f097bedbc18f46b08ac9eb79bba9
 
 build:
-  noarch: generic
-  number: 0
+  number: 1
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
     - perl-exception-class
     - perl-test-deep
     - perl-test-differences
@@ -20,7 +20,7 @@ requirements:
     - perl-test-warn
 
   run:
-    - perl
+    - perl-threaded
     - perl-exception-class
     - perl-test-deep
     - perl-test-differences

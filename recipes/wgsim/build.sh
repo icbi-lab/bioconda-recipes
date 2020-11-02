@@ -1,7 +1,8 @@
 #!/bin/bash
 
-"${CC}" ${CFLAGS} ${CPPFLAGS} ${LDFLAGS} -o wgsim wgsim.c -lz -lm
+git clone http://github.com/lh3/wgsim
+cd wgsim
+gcc -g -O2 -Wall -o wgsim wgsim.c -lz -lm
 
-mkdir "${PREFIX}/bin"
-cp wgsim wgsim_eval.pl "${PREFIX}/bin/"
+cp wgsim wgsim_eval.pl $PREFIX/bin/
 

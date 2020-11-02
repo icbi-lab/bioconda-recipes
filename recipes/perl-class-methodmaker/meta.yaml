@@ -7,30 +7,30 @@ package:
   version: {{ version }}
 
 source:
+  fn: Class-MethodMaker-2.24.tar.gz
   url: http://search.cpan.org/CPAN/authors/id/S/SC/SCHWIGON/class-methodmaker/Class-MethodMaker-2.24.tar.gz
   sha256: {{ sha256 }}
 
 
 build:
-  noarch: generic
-  number: 1
+  number: 0
 
 requirements:
-  host:
+  build:
     - perl
     - perl-test
     - perl-extutils-makemaker
     - perl-pod-escapes
     - perl-carp
     - perl-getopt-long
-
+    
   run:
     - perl
     - perl-test
     - perl-pod-escapes
     - perl-carp
     - perl-getopt-long
-
+    
 
 test:
   commands:

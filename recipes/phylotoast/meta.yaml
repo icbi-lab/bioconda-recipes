@@ -7,19 +7,32 @@ package:
   version: {{ version }}
 
 source:
+  fn: {{ name|lower }}_{{ version }}.tar.gz
   url: https://github.com/smdabdoub/phylotoast/archive/da6a606ed162ab082a9afa0ef0e0f3b5e94a872e.tar.gz
   sha256: {{ hash }}
 
 build:
-  number: 1
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
+  number: 0
+  skip: True  # [not py27]
 
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - python
+    - setuptools
+    - numpy
+    - scipy
+    - matplotlib <=1.5.3
+    - biopython >=1.60
+    - scikit-bio <=0.4.2
+    - scikit-learn
+    - pandas
+    - statsmodels
+    - palettable
+    - biom-format >=2.1.5
+    - h5py
+
   run:
-    - python <3
+    - python
     - numpy
     - scipy
     - matplotlib <=1.5.3

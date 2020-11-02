@@ -1,29 +1,41 @@
-{% set version = "1.0.0" %}
-
 package:
   name: transrate-tools
-  version: {{ version }}
+  version: "1.0.0"
 
 build:
-  number: 6
+  skip: True  #[osx]
+  number: 0
+  string: {{PKG_BUILDNUM}}
 
 source:
-  url: https://github.com/blahah/transrate-tools/archive/v{{ version }}.tar.gz
-  sha256: c4ba796243a21b0b85059aa4ddbc836026374129f2c9c1b9cab9f92f8396514a
+  fn: transrate-tools-1.0.0.tar.gz
+  url: https://github.com/blahah/transrate-tools/archive/v1.0.0.tar.gz
+  md5: 93323fbc46fc64a6f0cb1a1fc96c8dc8
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
+    - gcc >=4.8
+    - libgcc
+    - bamtools
+    - zlib
     - cmake
     - make
-    - zlib
+    - gnu-wget
+  run:
+    - libgcc
     - bamtools
-
+    - zlib
 test:
   commands:
-    - bam-read 2>&1 | grep "bam-read version" > /dev/null
+     - bam-read 2>&1 | grep "bam-read version" > /dev/null
 
 about:
   home: https://github.com/blahah/transrate-tools
   license: MIT
+  license_file: LICENSE
   summary: Command-line tools used by transrate for processing bam files.
+
+extra:
+  recipe-maintainers:
+    - notestaff
+

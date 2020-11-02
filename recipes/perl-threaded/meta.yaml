@@ -2,19 +2,17 @@
 
 package:
   name: perl-threaded
-  version: 5.26.0
+  version: 5.22.0
 
 build:
-  noarch: generic
-  number: 0
+  number: 12
 
 requirements:
   run:
-    - perl
-
+    - perl 5.22.0*
 test:
   commands:
-    - perl -v | grep 5.26
+    - perl --help > /dev/null
 
 about:
   home: http://www.perl.org/

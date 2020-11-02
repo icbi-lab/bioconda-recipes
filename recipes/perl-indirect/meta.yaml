@@ -7,16 +7,16 @@ package:
   version: {{ version }}
 
 source:
+  fn: indirect-0.38.tar.gz
   url: https://cpan.metacpan.org/authors/id/V/VP/VPIT/indirect-0.38.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  noarch: generic
-  number: 1
+  number: 0
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl {{CONDA_PERL}}*
     - perl-extutils-makemaker
     - perl-carp
     - perl-lib
@@ -24,7 +24,7 @@ requirements:
     - perl-socket6
 
   run:
-    - perl
+    - perl {{CONDA_PERL}}*
     - perl-xsloader
     - perl-carp
 

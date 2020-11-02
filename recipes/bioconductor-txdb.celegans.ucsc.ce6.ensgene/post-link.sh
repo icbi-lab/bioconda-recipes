@@ -1,9 +1,7 @@
 #!/bin/bash
 FN="TxDb.Celegans.UCSC.ce6.ensGene_3.2.2.tar.gz"
 URLS=(
-  "https://bioconductor.org/packages/3.11/data/annotation/src/contrib/TxDb.Celegans.UCSC.ce6.ensGene_3.2.2.tar.gz"
-  "https://bioarchive.galaxyproject.org/TxDb.Celegans.UCSC.ce6.ensGene_3.2.2.tar.gz"
-  "https://depot.galaxyproject.org/software/bioconductor-txdb.celegans.ucsc.ce6.ensgene/bioconductor-txdb.celegans.ucsc.ce6.ensgene_3.2.2_src_all.tar.gz"
+  "http://bioconductor.org/packages/3.6/data/annotation/src/contrib/TxDb.Celegans.UCSC.ce6.ensGene_3.2.2.tar.gz"
   "https://depot.galaxyproject.org/software/bioconductor-txdb.celegans.ucsc.ce6.ensgene/bioconductor-txdb.celegans.ucsc.ce6.ensgene_3.2.2_src_all.tar.gz"
 )
 MD5="215c2edd440a3df8229fe6a75b431aa8"
@@ -17,7 +15,7 @@ TARBALL=$STAGING/$FN
 
 SUCCESS=0
 for URL in ${URLS[@]}; do
-  curl $URL > $TARBALL
+  wget -O- -q $URL > $TARBALL
   [[ $? == 0 ]] || continue
 
   # Platform-specific md5sum checks.

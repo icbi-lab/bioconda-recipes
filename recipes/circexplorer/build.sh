@@ -1,4 +1,6 @@
 #!/bin/bash
 
-$PYTHON -m pip install . --ignore-installed --no-deps -vv
+$PYTHON setup.py install
 cp -rf circ/* $PREFIX/bin
+rm -rf example test
+rm flow.jpg

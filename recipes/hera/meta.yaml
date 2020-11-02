@@ -8,19 +8,22 @@ package:
 
 source:
   url: https://github.com/bioturing/hera/archive/hera-v{{ version }}.tar.gz
+  fn: {{ name|lower }}_{{ version }}.tar.gz
   sha256: {{ hash }}
   patches:
     - hera.patch
+    - hera.makefile.patch
 
 build:
-  number: 4
+  number: 0
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - gcc  # [not osx]
+    - llvm  # [osx]
     - cmake
-  host:
     - zlib
+    - jemalloc >=4.5.0
     - htslib
     - hdf5
     - libdivsufsort
@@ -29,7 +32,9 @@ requirements:
 
   run:
     - python
+    - libgcc  # [not osx]
     - zlib
+    - jemalloc >=4.5.0
     - htslib
     - hdf5
     - libdivsufsort

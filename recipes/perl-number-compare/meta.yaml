@@ -7,11 +7,10 @@ source:
   md5: ded4085a8fc96328742785574ca65208
 
 build:
-  noarch: generic
-  number: 2
+  number: 1
 
 requirements:
-  host:
+  build:
     - perl
     - perl-extutils-makemaker
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$PYTHON -m pip install . --ignore-installed --no-deps -vv
+$PYTHON setup.py install
 mv $PREFIX/bin/udocker $PREFIX/bin/udocker.py
 
 cat <<END >$PREFIX/bin/udocker

@@ -7,14 +7,15 @@ source:
   md5: bdcbc25899be101b421d2e01166876e7
 
 build:
-  number: 3
+  number: 1
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-  host:
+    - gcc   # [not osx]
+    - llvm  # [osx]
 
   run:
+    - libgcc    # [not osx]
 
 test:
   commands:

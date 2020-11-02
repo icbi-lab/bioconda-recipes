@@ -1,11 +1,6 @@
 #!/bin/bash
 
 cd src
-make CC="${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}"
-install -d "${PREFIX}/bin"
-install \
-    minion \
-    reaper \
-    swan \
-    tally \
-    "${PREFIX}/bin/"
+make
+mkdir -p $PREFIX/bin
+cp minion reaper swan tally $PREFIX/bin

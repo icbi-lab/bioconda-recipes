@@ -1,38 +1,33 @@
 package:
   name: emboss
-  version: "6.6.0"
+  version: "6.5.7"
 
 build:
-  number: 3
-  skip: True  # [osx]
+  number: 2
 
 source:
-  url: ftp://emboss.open-bio.org/pub/EMBOSS/EMBOSS-6.6.0.tar.gz
-  md5: cc3fca80cb0618deb10fa0d29fe90e4b
+  fn: EMBOSS-6.5.7.tar.gz
+  url: ftp://emboss.open-bio.org/pub/EMBOSS/old/6.5.0/EMBOSS-6.5.7.tar.gz
+  md5: 6a2cb3f93d5e9415c74ab0f6b1ede5f0
 
 requirements:
   build:
-    - {{ compiler('c') }}
-  host:
-    - python
-    - zlib
-    - libgd
-    - libpng
+   - gcc # [linux]
+   - llvm # [osx]
+   - python
+   - zlib
   run:
-    - zlib
-    - libgd
-    - libpng
+   - zlib
 
 about:
   home: http://emboss.open-bio.org/
   license: GPL
-  summary: The European Molecular Biology Open Software Suite
+  summary: The European Molecular Biology Open Software Suite 
 
 test:
   commands:
-    # test a few tools
+    # test a few tools 
     -  needle --help
     -  transeq --help
     -  sixpack --help
     -  seqret --help
-

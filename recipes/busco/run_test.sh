@@ -1,14 +1,12 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -euo pipefail
 
-prodigal -h
-makeblastdb -h
-tblastn -h
-augustus
-which gff2gbSmallDNA.pl
-etraining
-new_species.pl
-optimize_augustus.pl
-hmmsearch -h
-run_sepp.py -h
+cat > ex.fasta <<EOF
+>1
+AATTCC
+EOF
+wget http://busco.ezlab.org/datasets/proteobacteria_odb9.tar.gz
+tar -xf proteobacteria_odb9.tar.gz
+
+run_busco -i ex.fasta -o out -l proteobacteria_odb9 -m geno

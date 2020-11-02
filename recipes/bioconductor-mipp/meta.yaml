@@ -1,30 +1,29 @@
-{% set version = "1.60.0" %}
+{% set version = "1.50.0" %}
 {% set name = "MiPP" %}
-{% set bioc = "3.11" %}
+{% set bioc = "3.6" %}
 
 package:
   name: 'bioconductor-{{ name|lower }}'
   version: '{{ version }}'
 source:
+  fn: '{{ name }}_{{ version }}.tar.gz'
   url:
-    - 'https://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
-    - 'https://bioarchive.galaxyproject.org/{{ name }}_{{ version }}.tar.gz'
-    - 'https://depot.galaxyproject.org/software/bioconductor-{{ name|lower }}/bioconductor-{{ name|lower }}_{{ version }}_src_all.tar.gz'
-  md5: d515109c8a5b7c7e0466617225b464be
+    - 'http://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
+    - 'https://depot.galaxyproject.org/software/{{ name }}/{{ name }}_{{ version }}_src_all.tar.gz'
+  sha256: 35ed9a26100431c2cb7b6d20ed814952d9e5cbe8a8908e0d55ba99824805b1cd
 build:
   number: 0
   rpaths:
     - lib/R/lib/
     - lib/
-  noarch: generic
 requirements:
-  host:
-    - 'bioconductor-biobase >=2.48.0,<2.49.0'
+  build:
+    - bioconductor-biobase
     - r-base
     - r-e1071
     - r-mass
   run:
-    - 'bioconductor-biobase >=2.48.0,<2.49.0'
+    - bioconductor-biobase
     - r-base
     - r-e1071
     - r-mass
@@ -32,17 +31,6 @@ test:
   commands:
     - '$R -e "library(''{{ name }}'')"'
 about:
-  home: 'https://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
+  home: 'http://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
   license: 'GPL (>= 2)'
-  summary: 'Misclassification Penalized Posterior Classification'
-  description: 'This package finds optimal sets of genes that seperate samples into two or more classes.'
-  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
-extra:
-  identifiers:
-    - biotools:mipp
-    - doi:10.1093/bioinformatics/bti1020
-  parent_recipe:
-    name: bioconductor-mipp
-    path: recipes/bioconductor-mipp
-    version: 1.52.0
-
+  summary: 'This package finds optimal sets of genes that seperate samples into two or more classes.'

@@ -3,22 +3,24 @@ package:
   version: '0.4'
 
 source:
+  fn: LoRMA-0.4.tar.gz
   url: "https://www.cs.helsinki.fi/u/lmsalmel/LoRMA/LoRMA-0.4.tar.gz"
   md5: "3a59e427374ffbb84430528bc1430f64"
 
 build:
-  number: 3
+  number: 1
   skip: True # [osx]
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - gcc   # [linux]
+    - llvm  # [osx]
     - cmake
-  host:
-    - zlib
+    - zlib {{CONDA_ZLIB}}*
     - boost
   run:
-    - zlib
+    - libgcc  # [linux]
+    - zlib {{CONDA_ZLIB}}*
     - lordec
 
 test:

@@ -1,6 +1,10 @@
 #!/bin/bash
 
-make CC="${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}"
+make
 
-install -d "${PREFIX}/bin"
-install structure "${PREFIX}/bin/"
+binaries="\
+structure \
+"
+
+mkdir -p $PREFIX/bin
+for i in $binaries; do cp $SRC_DIR/$i $PREFIX/bin && chmod +x $PREFIX/bin/$i; done

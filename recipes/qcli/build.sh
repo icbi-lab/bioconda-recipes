@@ -2,6 +2,8 @@
 
 if [[ "${PY_VER}" =~ 3 ]]
 then
-    2to3 -w qcli/ scripts/*
+	2to3 -w qcli/ scripts/*
+	$PYTHON setup.py install	
+else
+	$PYTHON setup.py install
 fi
-$PYTHON -m pip install . --ignore-installed --no-deps -vv

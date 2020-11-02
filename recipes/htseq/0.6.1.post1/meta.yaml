@@ -1,30 +1,27 @@
 package:
   name: htseq
-  version: 0.6.1.post1
+  version: "0.6.1.post1"
 
 source:
+  fn: HTSeq-0.6.1p1.tar.gz
   url: https://pypi.python.org/packages/source/H/HTSeq/HTSeq-0.6.1p1.tar.gz
   md5: c44d7b256281a8a53b6fe5beaeddd31c
 
 build:
-  number: 5
-  skip: True # [py>=30]
-  script: |
-    sed -i.bak 's/0\.6\.1p1/0.6.1.post1/' PKG-INFO VERSION HTSeq/_version.py
-    {{ PYTHON }} -m pip install . --no-deps -vv
+  preserve_egg_dir: True
+  number: 1
+  skip: True # [not py27]
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-  host:
-    - pip
     - python
+    - setuptools
     - numpy
+
   run:
     - python
-    - {{ pin_compatible('numpy') }}
-    - matplotlib-base
+    - numpy
+    - matplotlib
     - pysam
 
 test:
@@ -36,6 +33,7 @@ test:
     - HTSeq.scripts.qa
     - HTSeq.scripts.count
 
+
   commands:
     - htseq-count -h
     - htseq-qa -h
@@ -44,8 +42,3 @@ about:
   home: http://www-huber.embl.de/users/anders/HTSeq/
   license:  GNU General Public License (GPL)
   summary: 'A framework to process and analyze data from high-throughput sequencing (HTS) assays'
-
-extra:
-  identifiers:
-    - biotools:htseq
-    - doi:10.1093/bioinformatics/btu638

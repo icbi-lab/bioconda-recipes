@@ -1,28 +1,25 @@
-{% set name = "perl-module-runtime" %}
-{% set version = "0.016" %}
-{% set sha256 = "68302ec646833547d410be28e09676db75006f4aa58a11f3bdb44ffe99f0f024" %}
-
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: perl-module-runtime
+  version: "0.014"
 
 source:
-  url: https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Module-Runtime-0.016.tar.gz
-  sha256: {{ sha256 }}
+  fn: Module-Runtime-0.014.tar.gz
+  url: http://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Module-Runtime-0.014.tar.gz
+  md5: a6597bc25536a30476f0d75b64d35734
 
 build:
-  noarch: generic
   number: 1
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
     - perl-module-build
 
   run:
-    - perl
+    - perl-threaded
 
 test:
+  # Perl 'use' tests
   imports:
     - Module::Runtime
 

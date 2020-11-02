@@ -1,14 +1,24 @@
 #!/bin/bash
 
-# The patch does not move the VERSION file on OSX. Let's make sure it's moved.
-mv VERSION{,.txt} || true
+mkdir -p $PREFIX/bin
 
-make \
-    CC="${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
-    CPP="${CXX} ${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}"
+if [ $PY3K -eq 1 ]
+then
+    2to3 --write \
+	hisat2_extract_exons.py \
+	hisat2_extract_snps_haplotypes_UCSC.py \
+	hisat2_extract_splice_sites.py \
+	hisat2-build hisat2-inspect \
+	hisat2_simulate_reads.py \
+	hisat2_extract_snps_haplotypes_VCF.py \
+	hisatgenotype_build_genome.py \
+	hisatgenotype_extract_reads.py \
+	hisatgenotype_extract_vars.py \
+	hisatgenotype_hla_cyp.py \
+	hisatgenotype_locus.py \
+	hisatgenotype.py
+fi
 
-# copy binaries and python scripts
-mkdir -p "${PREFIX}/bin"
 for i in \
     hisat2 \
     hisat2-align-l \
@@ -19,8 +29,22 @@ for i in \
     hisat2-inspect \
     hisat2-inspect-l \
     hisat2-inspect-s \
-    *.py
+    hisat2_extract_exons.py \
+    hisat2_extract_snps_haplotypes_UCSC.py \
+    hisat2_extract_snps_haplotypes_VCF.py \
+    hisat2_extract_splice_sites.py \
+    hisat2_simulate_reads.py \
+    hisatgenotype_build_genome.py \
+    hisatgenotype_extract_reads.py \
+    hisatgenotype_extract_vars.py \
+    hisatgenotype_hla_cyp.py \
+    hisatgenotype_locus.py \
+    hisatgenotype.py;
 do
-    cp "${i}" "${PREFIX}/bin/"
-    chmod +x "${PREFIX}/bin/${i}"
+    echo $i
+    cp $i $PREFIX/bin
+    chmod +x $PREFIX/bin/$i
 done
+
+cp -r example $PREFIX/bin
+

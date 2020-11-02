@@ -3,20 +3,20 @@ package:
   version: "0.02"
 
 source:
+  fn: Math-Spline-0.02.tar.gz
   url: http://cpan.metacpan.org/authors/id/C/CH/CHORNY/Math-Spline-0.02.tar.gz
   md5: 64c7bb3829e1fa7e49c2bf50b358c7c7
 
 build:
-  noarch: generic
-  number: 2
+  number: 0
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
     - perl-math-derivative
 
   run:
-    - perl
+    - perl-threaded
     - perl-math-derivative
 
 test:

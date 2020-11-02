@@ -3,19 +3,19 @@ package:
   version: "0.08"
 
 source:
+  fn: Algorithm-Munkres-0.08.tar.gz
   url: http://cpan.metacpan.org/authors/id/T/TP/TPEDERSE/Algorithm-Munkres-0.08.tar.gz
   md5: 56349287513f955002720c8e2523582b
 
 build:
-  noarch: generic
-  number: 1
+  number: 0
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
 
   run:
-    - perl
+    - perl-threaded
 
 test:
   # Perl 'use' tests

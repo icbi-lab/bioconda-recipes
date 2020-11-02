@@ -1,30 +1,35 @@
 {% set name = "mosdepth" %}
-{% set version = "0.3.1" %}
-{% set sha256hash = "f6ecbff30396102ad2059faa0005453b51b27d31b960f421ef266f507da96816" %}
+{% set version = "0.2.1" %}
+#{% set revision = "b6f1f37" %}
+{% set sha256hash = "7aadd0f322a50723a5b396cfe8eb640728be03918a8d41b5a8ab1ba4943c26c6" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - url: https://github.com/brentp/mosdepth/archive/v{{ version }}.tar.gz
-    sha256: {{ sha256hash }}
-  - url: https://nim-lang.org/download/nim-1.2.0.tar.xz
-    sha256: 4e94583a373965821805e665e0a05f52fb610916676edb09148941415637c575
-    folder: nim_source
+  url: https://github.com/brentp/mosdepth/archive/v{{ version }}.tar.gz
+  fn: {{ name }}-v{{ version }}.tar.gz
+  #url: https://github.com/brentp/mosdepth/releases/download/v{{ version }}/mosdepth
+  #fn: {{ name }}-{{ version }}
+  sha256: {{ sha256hash }}
+  patches:
+    - install.diff
 
 build:
   number: 0
+  skip: True  # [osx]
+  string: "htslib{{CONDA_HTSLIB}}_{{PKG_BUILDNUM}}"
 
 requirements:
   build:
-    - {{ compiler('c') }}
-  host:
+    - gcc
     - pcre
-    - htslib
+    - htslib {{CONDA_HTSLIB}}*
   run:
+    - libgcc
     - pcre
-    - htslib
+    - htslib {{CONDA_HTSLIB}}*
 
 test:
   commands:

@@ -1,17 +1,19 @@
 #!/bin/bash
 
-pushd src
+export CFLAGS="-I$PREFIX/include"
+export LDFLAGS="-L$PREFIX/lib"
+export CPATH=${PREFIX}/include
 
-make -f Makefile \
-  CC="${CC}" \
-  CFLAGS="${CFLAGS} -O2 -g -Wall -D__USE_FIXED_PROTOTYPES__" \
-  LDFLAGS="${LDFLAGS}"
+mkdir -p $PREFIX/bin
+cd src
+make
 
-mkdir -p "${PREFIX}/bin"
+binaries="\
+long_seq_tm_test \
+ntdpal \
+oligotm \
+primer3_core \
+"
 
-cp \
-  long_seq_tm_test \
-  ntdpal \
-  oligotm \
-  primer3_core \
-  "${PREFIX}/bin/"
+for i in $binaries; do cp $i $PREFIX/bin && chmod +x $PREFIX/bin/$i; done
+

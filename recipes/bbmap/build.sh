@@ -1,15 +1,16 @@
 #!/bin/bash
 
-set -x -e -o pipefail
-
 BINARY_HOME=$PREFIX/bin
-BBMAP_HOME=$PREFIX/opt/$PKG_NAME-$PKG_VERSION-$PKG_BUILDNUM
+BBMAP_HOME=$PREFIX/opt/bbmap-$PKG_VERSION
 
-mkdir -p $BINARY_HOME
+cd $SRC_DIR
+
+# copy source to bin
+mkdir -p $PREFIX/bin
 mkdir -p $BBMAP_HOME
+cp -R $SRC_DIR/* $BBMAP_HOME/
+cd $BBMAP_HOME && chmod a+x *.sh
 
-chmod a+x *.sh
-
-cp -R * $BBMAP_HOME/
-
+#cd $BINARY_HOME
+cd $BBMAP_HOME
 find *.sh -type f -exec ln -s $BBMAP_HOME/{} $BINARY_HOME/{} \;

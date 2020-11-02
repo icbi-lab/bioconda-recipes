@@ -1,53 +1,39 @@
-{% set version = "1.16.10" %}
 package:
   name: jbrowse
-  version: {{ version }}
+  version: "1.12.3"
 build:
   number: 0
+  skip: True # [osx]
 source:
-  sha256: 0dc9404f84584872c59d8c55cd1f6a03c5c0cd35ed977e585720b4b0d6d1761b
-  url: https://github.com/GMOD/jbrowse/archive/{{ version }}-release.zip
+  fn: jbrowse-1.12.3.zip
+  sha256: d97aa89e1862efb8f7be12762528f1e32b0f93d252ee197d753eb724c5730465
+  url: http://jbrowse.org/wordpress/wp-content/plugins/download-monitor/download.php?id=109
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-  host:
-    - nodejs
-    - python >=2.7,<3
-    - git
-    - perl
-    - perl-json
-    - perl-bioperl
-    - perl-test-deep
-    - perl-test-simple
-    - perl-test-warn
-    - perl-exporter-tiny
-    - perl-list-moreutils
-    - perl-capture-tiny
-    - perl-uri
-    - perl-scalar-list-utils
-    - perl-perlio-gzip
-    - perl-bio-gff3
-    - perl-devel-size
-    - perl-digest-crc32
-    - perl-file-next
-    - perl-hash-merge
-    - perl-heap-simple
-    - perl-db-file
-    - perl-bio-featureio
-    - perl-io-uncompress-gunzip
-    - perl-file-copy-recursive
-    - perl-local-lib
   run:
     - perl
     - perl-json
+    - perl-clone
+    - perl-io-string
     - perl-bioperl
+    - perl-test-differences
     - perl-test-deep
+    - perl-test-most
+    - perl-test-exception
+    - perl-test-nowarnings
     - perl-test-simple
     - perl-test-warn
     - perl-exporter-tiny
     - perl-list-moreutils
+    - perl-class-data-inheritable
+    - perl-devel-stacktrace
+    - perl-exception-class
+    - perl-sub-uplevel
+    - perl-algorithm-diff
     - perl-capture-tiny
+    - perl-text-diff
+    - perl-data-stag
     - perl-uri
     - perl-scalar-list-utils
     - perl-perlio-gzip
@@ -57,23 +43,13 @@ requirements:
     - perl-file-next
     - perl-hash-merge
     - perl-heap-simple
+    - perl-text-tabs-wrap
     - perl-db-file
-    - perl-bio-featureio
-    - perl-io-uncompress-gunzip
-    - perl-file-copy-recursive
-    - perl-local-lib
-    - gff3sort
 
 test:
   commands:
     - command -v add-json.pl
 about:
-  home: https://jbrowse.org/
+  home: http://jbrowse.org/
   license: LGPL
-  license_file: LICENSE
   summary: The JBrowse Genome Browser
-
-extra:
-  identifiers:
-    - biotools:jbrowse
-    - doi:10.1101/gr.094607.109

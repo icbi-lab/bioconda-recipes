@@ -3,11 +3,12 @@
 {% set md5 = "fa8a18451e6450359788985be8ab2c5e" %}
 
 source:
+  fn: MetaPhylerV1.25.tar.gz
   md5: {{ md5 }}
   url: http://metaphyler.cbcb.umd.edu/MetaPhylerV1.25.tar.gz
 
 build:
-  number: 4
+  number: 0
   skip: True # [osx]
 
 package:
@@ -16,10 +17,12 @@ package:
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - gcc  # [not osx]
+    - llvm  # [osx]
     - perl
     - blast-legacy
   run:
+    - libgcc  # [not osx]
     - perl
     - blast-legacy
 
@@ -35,6 +38,6 @@ test:
     - taxprof 2>&1 | grep "Usage"
 
 about:
-  home: 'http://metaphyler.cbcb.umd.edu/'
-  license: "Artistic License 2.0"
-  summary: "Estimating Bacterial Composition from Metagenomic Sequences"
+    home: 'http://metaphyler.cbcb.umd.edu/'
+    license: "Artistic License 2.0"
+    summary: "Estimating Bacterial Composition from Metagenomic Sequences"

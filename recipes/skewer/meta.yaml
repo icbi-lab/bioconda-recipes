@@ -3,32 +3,30 @@
 
 package:
   name: skewer
-  version: {{ version }}
+  version: '0.2.2'
 
 source:
+  fn: 'skewer-{{ version }}.zip'
   url: 'https://github.com/relipmoc/skewer/archive/{{ version }}.zip'
   md5: {{ md5sum }}
 
 build:
-  number: 3
+  number: 1
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
+    - gcc   # [not osx]
+    - llvm  # [osx]
     - make
-  host:
   run:
+    - libgcc  # [not osx]
 
 test:
-  commands:
-    - skewer 2>&1 | grep -qF 'skewer ({{ version }})'
+    commands:
+      - skewer 2>&1 | grep "skewer (0.2.2)" > /dev/null
 
 about:
   home: https://github.com/relipmoc/skewer.git
   license: MIT
   license_file: LICENSE
   summary: A fast and accurate adapter trimmer for paired-end reads.
-
-extra:
-  identifiers:
-    - biotools:skewer

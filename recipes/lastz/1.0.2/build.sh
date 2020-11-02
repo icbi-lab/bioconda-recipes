@@ -1,7 +1,12 @@
 #!/bin/bash
 
-make \
-  CC="${CC}" \
-  installDir="${PREFIX}/bin" \
-  definedForAll="${CFLAGS} -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
-  install
+mkdir -p $PREFIX/bin
+
+make 
+
+chmod +x  src/lastz
+chmod +x  src/lastz_D
+
+mv src/lastz $PREFIX/bin
+mv src/lastz_D $PREFIX/bin
+

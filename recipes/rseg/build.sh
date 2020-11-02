@@ -1,8 +1,8 @@
 #!/bin/bash
 
-make \
-    CC="${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}" \
-    CXX="${CXX} ${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}"
+mkdir -p ${PREFIX}/bin
+export C_INCLUDE_PATH=${PREFIX}/include
+export LIBRARY_PATH=${PREFIX}/lib
+make 
 make install
-install -d "${PREFIX}/bin"
-install bin/* "${PREFIX}/bin/"
+cp bin/* ${PREFIX}/bin

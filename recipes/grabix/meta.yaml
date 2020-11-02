@@ -4,18 +4,20 @@ package:
   version: "0.1.8"
 
 build:
-  number: 5
+  number: 2
+  skip: False
 
 source:
+  fn: grabix-{{ revision }}.tar.gz
   url: https://github.com/arq5x/grabix/archive/{{ revision }}.tar.gz
   md5: eb8805bed149ef56669ef19abba19b80
 requirements:
   build:
-    - {{ compiler('cxx') }}
-  host:
-    - zlib
+    - gcc
+    - zlib {{ CONDA_ZLIB }}*
   run:
-    - zlib
+    - libgcc
+    - zlib {{ CONDA_ZLIB }}*
 test:
   commands:
     - grabix

@@ -1,12 +1,16 @@
-{% set version = "1.8" %}
+{% set name = "r-histonehmm" %}
+{% set version = "1.6" %}
+{% set hash = "7b93557a41b5cc695e8f6cd41aefa2e7" %}
 
 package:
-  name: "r-histonehmm"
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/matthiasheinig/histoneHMM/archive/v{{ version }}.tar.gz
-  sha256: 89f420e9f705594af57301d07c2136e2b56079aa3e93d9723dd0ba3a686ce3ee
+  fn: {{ name|lower }}_{{ version }}.tar.gz
+  url: http://histonehmm.molgen.mpg.de/histoneHMM_{{ version }}.tar.gz
+  md5: {{ hash }}
+  patches: loghmm.patch
 
 build:
   number: 1
@@ -16,10 +20,6 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}
-  host:
     - r-base
     - r-rcpp
     - bioconductor-genomicranges
@@ -27,6 +27,8 @@ requirements:
     - r-mvtnorm
     - r-optparse
     - bioconductor-biocstyle
+    - gcc
+
   run:
     - r-base
     - r-rcpp
@@ -35,6 +37,7 @@ requirements:
     - r-mvtnorm
     - r-optparse
     - bioconductor-biocstyle
+    - libgcc
 
 test:
   commands:
@@ -42,7 +45,6 @@ test:
 
 about:
   home: http://histonehmm.molgen.mpg.de/
-  dev_url: https://github.com/matthiasheinig/histoneHMM
   license: GPL
   summary: histoneHMM is a software to analyse ChIP-seq data of histone modifications
     with broad genomic footprints like H3K27me3. It allows for calling modified regions

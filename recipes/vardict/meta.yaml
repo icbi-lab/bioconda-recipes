@@ -1,34 +1,27 @@
-{% set version = "1.8.2" %}
-
 package:
   name: vardict
-  version: {{ version }}
+  version: '2017.11.23'
 
 source:
-  url: https://github.com/AstraZeneca-NGS/VarDict/archive/v{{version}}.tar.gz
-  sha256: 0b26f0e89f79692858e232ef4fc904770c9e46cba58dcd6513a3fc624f4f7dde
+  fn: vardict-94a39b7.tar.gz
+  url: https://github.com/AstraZeneca-NGS/VarDict/archive/94a39b7.tar.gz
+  sha256: 3b40358976d62e042ca6e43f1f9a8237b374188eaaec7ab6e9d38f881854d73e
 
 build:
   number: 0
-  noarch: generic
+  skip: False
 
 requirements:
-  host:
-    - perl
-    - vardict-java
+  build:
   run:
     - perl
-    - vardict-java
+    - r-base
 
 test:
   commands:
-    - vardict -H
+    - vardict -h
 
 about:
   home: https://github.com/AstraZeneca-NGS/VarDict
   license: MIT
-  license_family: MIT
   summary: A sensitive variant caller for both single and paired sample variant calling
-extra:
-  recipe-maintainers:
-    - roryk

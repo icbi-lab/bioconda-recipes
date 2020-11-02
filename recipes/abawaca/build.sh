@@ -1,3 +1,3 @@
 make
-install -d "${PREFIX}/bin"
-install abawaca "${PREFIX}/bin/"
+mkdir -p $PREFIX/bin
+cp abawaca $PREFIX/bin

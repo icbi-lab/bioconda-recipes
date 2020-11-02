@@ -28,7 +28,7 @@ cd perl-build
 
 rm lib/setup.sh
 perl ./Build.PL
-perl ./Build manifest
-perl ./Build install --installdirs site
+./Build manifest
+./Build install --installdirs site
 
 #mv * $PREFIX/bin/

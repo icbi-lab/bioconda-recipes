@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export C_INCLUDE_PATH=${PREFIX}/include
+export LIBRARY_PATH=${PREFIX}/lib
+
 make
-install -d "${PREFIX}/bin"
-install SweepFinder2 "${PREFIX}/bin/"
+mkdir -p $PREFIX/bin
+cp SweepFinder2 $PREFIX/bin

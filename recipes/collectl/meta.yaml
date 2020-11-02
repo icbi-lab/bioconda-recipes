@@ -9,20 +9,19 @@ source:
     - usrenvbin.patch
 
 build:
-  noarch: generic
-  number: 3
+  number: 1
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
     - zlib
   run:
-    - perl
+    - perl-threaded
     - zlib
 
 test:
   commands:
-    - collectl --help
+     - collectl --help
 
 about:
   home: http://collectl.sourceforge.net/

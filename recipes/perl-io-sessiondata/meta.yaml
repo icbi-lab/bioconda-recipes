@@ -3,19 +3,19 @@ package:
   version: "1.03"
 
 source:
+  fn: IO-SessionData-1.03.tar.gz
   url: http://cpan.metacpan.org/authors/id/P/PH/PHRED/IO-SessionData-1.03.tar.gz
   md5: 790f9e05465c774cf9a6299500463104
 
 build:
-  noarch: generic
-  number: 1
+  number: 0
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
 
   run:
-    - perl
+    - perl-threaded
 
 test:
   # Perl 'use' tests

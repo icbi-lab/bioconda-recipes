@@ -1,13 +1,16 @@
 #!/bin/bash
 mkdir -p "$PREFIX/bin"
-export MACHTYPE=x86_64
-export BINDIR=$(pwd)/bin
-export L="${LDFLAGS}"
-mkdir -p "$BINDIR"
-(cd kent/src/lib && make)
-(cd kent/src/htslib && make)
-(cd kent/src/jkOwnLib && make)
-(cd kent/src/hg/lib && make)
-(cd kent/src/hg/mouseStuff/chainMergeSort && make)
-cp bin/chainMergeSort "$PREFIX/bin"
+if [ "$(uname)" == "Darwin" ]; then
+    cp chainMergeSort "$PREFIX/bin"
+else
+    export MACHTYPE=x86_64
+    export BINDIR=$(pwd)/bin
+    mkdir -p "$BINDIR"
+    (cd kent/src/lib && make)
+    (cd kent/src/htslib && make)
+    (cd kent/src/jkOwnLib && make)
+    (cd kent/src/hg/lib && make)
+    (cd kent/src/hg/mouseStuff/chainMergeSort && make)
+    cp bin/chainMergeSort "$PREFIX/bin"
+fi
 chmod +x "$PREFIX/bin/chainMergeSort"

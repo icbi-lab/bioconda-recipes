@@ -6,7 +6,7 @@ PACKAGE_HOME=$PREFIX/opt/$PKG_NAME-$PKG_VERSION
 mkdir -p $PREFIX/bin
 mkdir -p $PACKAGE_HOME
 
-cp $RECIPE_DIR/gatk.py $PACKAGE_HOME/gatk3.py
+cp $RECIPE_DIR/gatk.py $PACKAGE_HOME/gatk.py
 
 # jar locations: Handle both nested (GATK3.8) and non-ested (<=GATK 3.7)
 NESTED_GLOB="GenomeAnalysisTK-*/GenomeAnalysisTK.jar"
@@ -21,5 +21,5 @@ mv $JAR $PACKAGE_HOME/
 
 chmod +x $PACKAGE_HOME/*.{py,jar}
 
-ln -s $PACKAGE_HOME/gatk.py $PREFIX/bin/gatk3
+ln -s $PACKAGE_HOME/gatk.py $PREFIX/bin/gatk
 ln -s $PACKAGE_HOME/gatk.py $PREFIX/bin/GenomeAnalysisTK

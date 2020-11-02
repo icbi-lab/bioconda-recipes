@@ -3,11 +3,11 @@
 
 about:
   home: http://i.cs.hku.hk/~alse/hkubrg/projects/idba_ud/
-  license: GPL2
+  license: ''
   summary: 'IDBA is a practical iterative De Bruijn Graph De Novo Assembler for sequence assembly in bioinformatics.'
 
 build:
-  number: 2
+  number: 0
 
 package:
   name: {{ name }}
@@ -17,23 +17,18 @@ requirements:
   build:
     - autoconf
     - automake
-    - {{ compiler('c') }}
-  host:
+    - gcc
     - gawk
     - python
-    - perl
+    - perl-threaded
   run:
+    - libgcc
 
 source:
+  fn: {{ version }}.tar.gz
   url: https://github.com/loneknightpy/idba/archive/{{ version }}.tar.gz
   md5: 303d9b4af7a7498b56ac9698028b4e15
-  patches:
-    - idba-kmer.patch # https://github.com/loneknightpy/idba/pull/41
-test:
-  commands:
-    - idba --help 2>&1 | grep "Iterative de Bruijn Graph Assembler"
 
-extra:
-  identifiers:
-    - biotools:idba
-    - doi:10.1007/978-3-642-12683-3_28
+test:
+    commands:
+        - idba --help 2>&1 | grep "Iterative de Bruijn Graph Assembler"

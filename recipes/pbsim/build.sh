@@ -1,5 +1,5 @@
 #!/bin/bash
-autoreconf -fi
-./configure --prefix="${PREFIX}"
+set -euo pipefail
+./configure --prefix=$PREFIX
 make
 make install

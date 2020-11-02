@@ -1,4 +1,7 @@
 #!/bin/bash
-make CC=$CXX
-mkdir -p "$PREFIX/bin"
-cp fastq-multx "$PREFIX/bin"
+
+rm fastq-multx
+make
+
+mkdir -p $PREFIX/bin
+cp fastq-multx $PREFIX/bin

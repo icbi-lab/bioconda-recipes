@@ -1,4 +1,4 @@
 #! /bin/bash
 mkdir -p $PREFIX/bin
-make CC=${CC}
+make
 cp mreps $PREFIX/bin

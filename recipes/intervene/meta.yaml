@@ -1,33 +1,45 @@
 package:
   name: intervene
-  version: "0.6.4"
+  version: "0.6.2"
 
 source:
-  url: https://files.pythonhosted.org/packages/0c/75/f25de59d86d590609adbf1b9c3ad1e6f37bfa7a7be99dec7248f3a1a4a8e/intervene-0.6.4.tar.gz
-  sha256: 4132324b848c0ea65579f24fa04211b254fe95af84242069e1a268bf370ddbb5
+  fn: intervene-0.6.2.tar.gz
+  url: https://pypi.python.org/packages/62/8c/6723fd07cf76d29d202d512211848dee8626e53aabf73f3458588b30588d/intervene-0.6.2.tar.gz
+  md5: 30e37a4edafb58d99d7d78bf3266f220
 
 build:
-  noarch: python
-  number: 4
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
-  host:
+  build:
     - python
-    - pip
-  run:
-    - python
-    - bedtools >=2.29.1
+    - setuptools
+    - bedtools
     - pybedtools
-    - matplotlib-base
+    - matplotlib
     - pandas
     - numpy
     - scipy
     - seaborn
-    - r-base
-    - r-upsetr >=1.4.0
+    - r
+    - r-upsetr
+    - r-corrplot
+    - r-cairo
+
+  run:
+    - python
+    - bedtools
+    - pybedtools
+    - matplotlib
+    - pandas
+    - numpy
+    - scipy
+    - seaborn
+    - r
+    - r-upsetr
     - r-corrplot
     - r-cairo
 
@@ -50,8 +62,3 @@ about:
   license: MIT License
   summary: 'A tool for intersection of multiple gene or genomic region sets and visualization as venn diagrams, UpSet plots or pariwaise heatmaps'
   license_family: MIT
-
-extra:
-  identifiers:
-    - biotools:Intervene
-    - doi:10.1186/s12859-017-1708-7

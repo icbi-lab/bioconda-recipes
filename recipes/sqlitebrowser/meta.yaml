@@ -1,5 +1,5 @@
 build:
-  number: 1
+  number: 0
   skip: True # [osx]
 
 package:
@@ -7,16 +7,17 @@ package:
   version: "3.8.0"
 
 source:
+  fn: sqlitebrowser-3.8.0.tar.gz
   url: https://codeload.github.com/sqlitebrowser/sqlitebrowser/tar.gz/v3.8.0
-  sha256: f638a751bccde4bf0305a75685e2a72d26fc3e3a69d7e15fd84573f88c1a4d92
 
 requirements:
   build:
     - cmake
-    - {{ compiler('c') }}
+    - gcc
     - sqlite
     - qt
   run:
+    - libgcc
     - sqlite
     - qt
 

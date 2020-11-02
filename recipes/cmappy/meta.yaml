@@ -1,32 +1,36 @@
-{% set version = "4.0.1" %}
-{% set sha256 = "ecd6349a2de743176f12cd36019844ed1dd45bdb4f45e125d260675bb219ad90" %}
+{% set version = "3.0.0" %}
 
 package:
   name: cmappy
-  version: '{{version}}'
+  version: {{ version }}
 
 source:
+  fn: cmapPy-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/c/cmappy/cmapPy-{{ version }}.tar.gz
-  sha256: ecd6349a2de743176f12cd36019844ed1dd45bdb4f45e125d260675bb219ad90
+  sha256: 7def0596d20a653b0f135926e8a80d5d15d0f722cfc95bbe14ba00aaa519de6b
 
 build:
+  skip: True  # [not py27] 
   entry_points:
     - gctx2gct=cmapPy.pandasGEXpress.gctx2gct:main
     - gct2gctx=cmapPy.pandasGEXpress.gct2gctx:main
-    - concat=cmapPy.pandasGEXpress.concat:main
-    - subset=cmapPy.pandasGEXpress.subset:main
-  number: 1
-  skip: True  # [py<30]
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+    - concat_gctoo=cmapPy.pandasGEXpress.concat_gctoo:main
+    - slice_gct=cmapPy.pandasGEXpress.slice_gct:main
+  number: 0
 
 requirements:
   build:
-    - {{ compiler("cxx") }}
-  host:
     - python
-    - pip
+    - gcc  # [not osx]
+    - llvm  # [osx]
+    - setuptools
+    - numpy >=1.11.2  
+    - pandas >=0.18
+    - h5py >=2.6.0
+    - requests >=2.13.0
   run:
     - python
+    - libgcc  # [not osx]
     - numpy >=1.11.2
     - pandas >=0.18
     - h5py >=2.6.0
@@ -41,12 +45,10 @@ test:
   commands:
     - gctx2gct --help
     - gct2gctx --help
-    - concat --help
-    - subset --help
+    - concat_gctoo --help
 
 about:
   home: https://github.com/cmap/cmapPy
   license: BSD 3-clause
+  summary: 'Assorted tools for interacting with .gct, .gctx, .grp, and .gmt files as well as other Connectivity Map (Broad Institute) data/tools'
   license_family: BSD
-  summary: Assorted tools for interacting with .gct, .gctx, .grp, and .gmt files as
-    well as other Connectivity Map (Broad Institute) data/tools

@@ -1,8 +1,10 @@
 #!/bin/bash
-sed -i.bak "s/inline void ld_set/static inline void ld_set/g" bcr.c
+export CFLAGS="-I$PREFIX/include"
+export LDFLAGS="-L$PREFIX/lib"
+export CPATH=${PREFIX}/include
 
-autoreconf -fi
-./configure --prefix="${PREFIX}"
-make
-make install
-install run-fermi.pl "${PREFIX}/bin/"
+mkdir -p $PREFIX/bin
+
+make 
+mv fermi  $PREFIX/bin
+mv run-fermi.pl $PREFIX/bin

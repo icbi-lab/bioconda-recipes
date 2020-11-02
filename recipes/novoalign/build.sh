@@ -1,17 +1,15 @@
 #!/bin/bash
 set -eu
 
-# Compile and install novo2maq
-make -C novo2maq CC="$CC" CXX="$CXX" CFLAGS="-g -Wall -O2 -m64 -fpermissive -isystem $PREFIX/include" LIBS="-L${PREFIX}/lib -lz -lm"
-cp novo2maq/novo2maq ${PREFIX}/bin
+PACKAGE_HOME=$PREFIX/bin
 
-# Install all executables
-find . -maxdepth 1 -perm -111 -type f -exec cp {} ${PREFIX}/bin ';'
+mkdir -p $PACKAGE_HOME
+chmod a+x *novo*
+cp isnovoindex novo2paf novoalign novoalignCS novoalignCSMPI novoalignMPI novobarcode novoindex novomethyl novope2bed.pl novorun.pl novosort novoutil $PACKAGE_HOME
 
-# Install license script
-cp ${RECIPE_DIR}/novoalign-license-register.sh ${PREFIX}/bin/novoalign-license-register
+SOURCE_FILE=$RECIPE_DIR/novoalign-license-register.sh
+DEST_FILE=$PACKAGE_HOME/novoalign-license-register
 
-# Install documentation
-DOC_DIR=${PREFIX}/share/doc/novoalign
-mkdir -p ${DOC_DIR}
-cp *.pdf *.txt ${RECIPE_DIR}/license.txt ${DOC_DIR}
+cp "$SOURCE_FILE" "$DEST_FILE"
+
+chmod +x $DEST_FILE

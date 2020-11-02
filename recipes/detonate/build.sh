@@ -1,32 +1,19 @@
 #!/bin/sh
 set -x -e
 
-export C_INCLUDE_PATH="${PREFIX}/include"
-export CPP_INCLUDE_PATH="${PREFIX}/include"
-export CXX_INCLUDE_PATH="${PREFIX}/include"
-export CPLUS_INCLUDE_PATH="${PREFIX}/include"
+export INCLUDE_PATH="${PREFIX}/include"
 export LIBRARY_PATH="${PREFIX}/lib"
+export LD_LIBRARY_PATH="${PREFIX}/lib"
 
-pushd ref-eval
-#touch boost/finished
-pushd sam
-make CC=$CC CFLAGS="$CFLAGS -L$PREFIX/lib" LIBCURSES="-lncurses" LIBPATH="$LDFLAGS"
-popd
-sed -i.bak "44d" Makefile
-make CXX=$CXX \
-     CXXFLAGS="$CXXFLAGS"
-#     BOOSTINC="-I$PREFIX/include" \
-#     BOOSTLIB="$PREFIX/lib/libboost_program_options.a $PREFIX/lib/libboost_random.a" \
-#     TEST_LIB="$PREFIX/lib/libboost_unit_test_framework.a"
-popd
+export LDFLAGS="-L${PREFIX}/lib "
+export CPPFLAGS="-I${PREFIX}/include -I${PREFIX}/include/ncursesw/"
+export CFLAGS="$CPPFLAGS"
 
-pushd rsem-eval
-make CC=$CXX CFLAGS="$CXXFLAGS"
-popd
+export CFLAGS_EXTRA="${LDFLAGS} ${CPPFLAGS}"
 
-#find -name Makefile | xargs -I {} sed -i.bak 's/-lcurses/-lncurses -ltinfo/g' {}
+find -name Makefile | xargs -I {} sed -i.bak 's/-lcurses/-lncurses/g' {}
 
-#make
+make
 
 mkdir -p $PREFIX/bin
 

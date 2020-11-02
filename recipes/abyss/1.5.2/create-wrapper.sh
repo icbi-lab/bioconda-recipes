@@ -12,11 +12,8 @@ test ! -e "$2"
 mv "$1" "$2"
 chmod a-x "$2"
 
-interpreter="$(sed -nE '1 s|^#! *(/usr)?/bin/||p;q' "$2")"
-[ -n "${interpreter}" ]
 cat >"$1" <<EOF
 #!/bin/bash
-exec ${interpreter} '$2' "\$@"
+exec $(sed 's|^#!/\(usr/\)\?bin/||;q' "$2") '$2' "\$@"
 EOF
-
 chmod u+x "$1"

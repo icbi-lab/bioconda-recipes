@@ -3,20 +3,22 @@ package:
   version: "1.1"
 
 source:
+  fn: stacks_summary-1.1.tar.gz
   url: https://pypi.python.org/packages/2f/9f/15d1c496187695d038182801af4a9b33127023a14073437554695afcd362/stacks_summary-1.1.tar.gz
   md5: 20e72a66a52502954894168f1cf197c3
 
 build:
-  noarch: python
-  number: 1
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
+  number: 0
+  skip: True  # [not py27]
 
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - python
+    - setuptools
+    - numpy
+
   run:
-    - python <3
+    - python
     - numpy
 
 test:

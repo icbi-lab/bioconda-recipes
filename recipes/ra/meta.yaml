@@ -3,22 +3,25 @@ package:
   version: "0.9"
 
 build:
-  number: 2
+  number: 0
   skip: True # [osx]
 
 source:
+  fn: ra_v0.9.tar.gz
   url: https://github.com/mariokostelac/ra/archive/v0.9.tar.gz
   md5: 387006cf89e9cbf331e2a09b62caa002
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+  - gcc [linux]
+  - llvm [osx]
+
   run:
+  - libgcc [linux]
 
 test:
   commands:
-    - zoom  #2>&1 | grep usage
+    - zoom 2>&1 | grep usage > /dev/null
 
 about:
   home: https://github.com/mariokostelac/ra

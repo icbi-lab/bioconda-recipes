@@ -10,3 +10,4 @@ cp *.py $target
 
 chmod -R a+rx $target/
 ln -s $target/* $PREFIX/bin
+

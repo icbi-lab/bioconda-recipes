@@ -7,25 +7,28 @@ package:
 
 source:
   url: https://github.com/seqan/flexbar/archive/v{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  fn: flexbar_v{{ version }}.tar.gz
+  sha256: "{{ sha256 }}"
 
 build:
-  number: 3
-  skip: True  # [osx]
+  number: 0
+  skip: True # [osx]
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
+    - gcc    # [not osx]
+    - llvm   # [osx]
     - cmake
-  host:
-    - tbb-devel
+    - tbb
     - seqan-library ==1.4.2
     - bzip2
-    - zlib
+    - zlib {{CONDA_ZLIB}}*
   run:
+    - libgcc # [not osx]
+    - tbb
     - seqan-library ==1.4.2
     - bzip2
-    - zlib
+    - zlib {{CONDA_ZLIB}}*
 
 test:
   commands:
@@ -35,7 +38,3 @@ about:
   home: https://github.com/seqan/flexbar
   license: BSD-3-Clause
   summary: Flexible barcode and adapter removal
-
-extra:
-  identifiers:
-    - biotools:flexbar

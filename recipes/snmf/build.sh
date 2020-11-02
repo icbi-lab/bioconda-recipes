@@ -3,7 +3,7 @@
 SNMF_HOME=$PREFIX/share/${PKG_NAME}_v$PKG_VERSION
 
 mkdir -p $SNMF_HOME
-mv src/* $SNMF_HOME/
+mv $SRC_DIR/* $SNMF_HOME/
 
 mkdir -p $SNMF_HOME/bin
 mkdir -p $SNMF_HOME/code/lib/
@@ -21,11 +21,10 @@ mkdir -p $SNMF_HOME/code/obj/sNMF
 mkdir -p $SNMF_HOME/code/obj/stats
 
 cd $SNMF_HOME
-
-pushd code
-make clean
-make CC="${CC}" CFLAGS+=' -lm -lpthread'
-popd
+chmod +x install.command
+./install.command
 
 mkdir -p $PREFIX/bin
 cp $SNMF_HOME/bin/* ${PREFIX}/bin
+
+

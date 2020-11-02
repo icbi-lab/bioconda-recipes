@@ -7,17 +7,20 @@ package:
   version: {{ version }}
 
 source:
+  fn: {{ name|lower }}-{{ version }}.tar.gz
   url: http://it.hcmute.edu.vn/bioinfo/metapro/Source/{{ name }}{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - gcc     # [not osx]
+    - llvm    # [osx]
 
   run:
+    - libgcc  # [not osx]
     - blast
 
 test:
@@ -34,8 +37,7 @@ about:
     in C++
 
 extra:
-  recipe-maintainers:
+  maintainers:
     - keuv-grvl
-  identifiers:
-    - doi:10.1186/s12859-015-0872-x
+  doi: 10.1186/s12859-015-0872-x
   notes: Databases are required. Please see the project homepage.

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Canvas wrapper script for external dotnet installation
+# Canvas wrapper script for anaconda mono installation
 
 set -o pipefail
 
@@ -15,6 +15,6 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 ENV_PREFIX="$(dirname $(dirname $DIR))"
 # Use mono installed with Anaconda
-#mono="$ENV_PREFIX/bin/mono"
+mono="$ENV_PREFIX/bin/mono"
 
-exec dotnet ${DIR}/Canvas.dll "$@"
+exec $mono ${DIR}/Canvas.dll "$@"

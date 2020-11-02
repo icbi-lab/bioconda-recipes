@@ -3,21 +3,21 @@ package:
   version: "0.14"
 
 source:
+  fn: HTML-TreeBuilder-XPath-0.14.tar.gz
   url: http://cpan.metacpan.org/authors/id/M/MI/MIROD/HTML-TreeBuilder-XPath-0.14.tar.gz
   md5: a3fa3b73ff51dd6ec63be394dcd2a3b5
 
 build:
-  noarch: generic
-  number: 1
+  number: 0
 
 requirements:
-  host:
-    - perl
+  build:
+    - perl-threaded
     - perl-html-tree
     - perl-xml-xpathengine
 
   run:
-    - perl
+    - perl-threaded
     - perl-html-tree
     - perl-xml-xpathengine
 

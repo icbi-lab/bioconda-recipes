@@ -1,11 +1,10 @@
 #!/bin/bash
-FN="TxDb.Dmelanogaster.UCSC.dm6.ensGene_3.11.0.tar.gz"
+FN="TxDb.Dmelanogaster.UCSC.dm6.ensGene_3.4.1.tar.gz"
 URLS=(
-  "https://bioconductor.org/packages/3.11/data/annotation/src/contrib/TxDb.Dmelanogaster.UCSC.dm6.ensGene_3.11.0.tar.gz"
-  "https://bioarchive.galaxyproject.org/TxDb.Dmelanogaster.UCSC.dm6.ensGene_3.11.0.tar.gz"
-  "https://depot.galaxyproject.org/software/bioconductor-txdb.dmelanogaster.ucsc.dm6.ensgene/bioconductor-txdb.dmelanogaster.ucsc.dm6.ensgene_3.11.0_src_all.tar.gz"
+  "http://bioconductor.org/packages/3.6/data/annotation/src/contrib/TxDb.Dmelanogaster.UCSC.dm6.ensGene_3.4.1.tar.gz"
+  "https://depot.galaxyproject.org/software/bioconductor-txdb.dmelanogaster.ucsc.dm6.ensgene/bioconductor-txdb.dmelanogaster.ucsc.dm6.ensgene_3.4.1_src_all.tar.gz"
 )
-MD5="b7dc405a750d59164d1434fb5dd8554b"
+MD5="539737dcb0b3d6d0134f5fe2ecf4e835"
 
 # Use a staging area in the conda dir rather than temp dirs, both to avoid
 # permission issues as well as to have things downloaded in a predictable
@@ -16,7 +15,7 @@ TARBALL=$STAGING/$FN
 
 SUCCESS=0
 for URL in ${URLS[@]}; do
-  curl $URL > $TARBALL
+  wget -O- -q $URL > $TARBALL
   [[ $? == 0 ]] || continue
 
   # Platform-specific md5sum checks.

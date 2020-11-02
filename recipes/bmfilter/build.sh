@@ -1,12 +1,27 @@
 #!/bin/bash
 
-set -x
+set -e -x -o pipefail
 
-if [[ ${target_platform} =~ linux.* ]]; then
-    make -C general  CC="${CC}" CXX="${CXX}" DEBUG="${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS} -std=c++03"
-    make -C bmtagger CC="${CC}" CXX="${CXX}" DEBUG="${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS} -std=c++03"
-    cd bmtagger
+binaries="\
+bmfilter \
+"
+
+mkdir -p $PREFIX/bin
+#for i in $binaries; do cp $SRC_DIR/bmtagger/$i $PREFIX/bin/ && chmod +x $PREFIX/bin/$i; done
+
+if [ "$(uname)" == "Darwin" ]; then
+    echo "Platform: Mac"
+
+    for i in $binaries; do cp $SRC_DIR/$i $PREFIX/bin/ && chmod +x $PREFIX/bin/$i; done
+
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    echo "Platform: Linux"
+
+    # cd to location of Makefile and source
+    cd $SRC_DIR/
+    make    
+
+    for i in $binaries; do cp $SRC_DIR/bmtagger/$i $PREFIX/bin/ && chmod +x $PREFIX/bin/$i; done
 fi
 
-install -d "${PREFIX}/bin"
-install bmfilter "${PREFIX}/bin/"
+chmod +x $PREFIX/bin/*

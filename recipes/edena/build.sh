@@ -1,5 +1,6 @@
 #!/bin/bash
 
-make CCC="${CXX} ${CXXFLAGS} ${CPPFLAGS} ${LDFLAGS}"
-install -d "${PREFIX}/bin"
-install bin/edena "${PREFIX}/bin/"
+mkdir -p $PREFIX/bin
+
+make
+cp bin/edena $PREFIX/bin

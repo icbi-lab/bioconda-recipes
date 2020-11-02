@@ -7,16 +7,21 @@ source:
   md5: ed48846deffefe25784c9f8b7db2de6e
 
 build:
-  noarch: python
-  number: 3
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
+  number: 1
+  skip: True #[not py27]
 
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - python
+    - setuptools
+    - drmaa
+    - numpy
+    - scipy
+    - biopython
+    - blast
+
   run:
-    - python <3
+    - python
     - drmaa
     - numpy
     - scipy

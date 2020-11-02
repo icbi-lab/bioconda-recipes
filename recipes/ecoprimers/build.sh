@@ -1,8 +1,16 @@
 #!/bin/bash
+export CFLAGS="-I$PREFIX/include"
+export LDFLAGS="-L$PREFIX/lib"
+export CPATH=${PREFIX}/include
 
-cd ecoPrimers || true
+mkdir -p $PREFIX/bin
+
 cd src
-make -e
+make
 
-install -d "${PREFIX}/bin"
-install ecoPrimers "${PREFIX}/bin/"
+binaries="\
+ecoPrimers \
+"
+
+for i in $binaries; do cp $i $PREFIX/bin && chmod +x $PREFIX/bin/$i; done
+

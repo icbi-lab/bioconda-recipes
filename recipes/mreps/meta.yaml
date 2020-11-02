@@ -1,32 +1,31 @@
-{% set name = "mreps" %}
-{% set version = "2.6.01" %}
-
 package:
-  name: {{ name }}
-  version: {{ version }}
+  name: mreps
+  version: "0.1"
 
 build:
   number: 0
 
 source:
-  url: https://github.com/gregorykucherov/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: fde80804d7d4381b09d2dcf85bc6b01f8b06577972ce6123ca934de0fa0ea938
+  fn:  mreps-2.6.tar
+  url: http://mreps.univ-mlv.fr/mreps-2.6.tar
+  md5: 4cc5444676501adeddf09f0aaf68dde8
 
 requirements:
   build:
-    - {{ compiler('c') }}
+  - gcc # [linux]
+  - llvm # [osx]
+
   run:
+  - libgcc # [not osx]
 
 test:
+  files:
+    - DmelChr4.fa
   commands:
-    - {{ name }} -version 
+    - mreps -res 3 -exp 3.0 -from 10000 -to 12000 DmelChr4.fa
 
 about:
-  home: http://mreps.univ-mlv.fr/
+  home: http://mreps.univ-mlv.fr/ 
   license: GNU GENERAL PUBLIC LICENSE
   license_file: LICENSE.md
   summary: mreps is a flexible and efficient software for identifying serial repeats (usually called tandem repeats) in DNA sequences.
-
-extra:
-  identifiers:
-    - biotools:mreps

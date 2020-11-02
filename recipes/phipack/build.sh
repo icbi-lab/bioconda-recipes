@@ -1,16 +1,11 @@
 #!/bin/sh
 
-# There's a . directory that's ignored on OSX but not Linux
-if [[ $(uname -s) == "Darwin" ]]; then
-cd src
-else
-cd PhiPack/src/
-fi
-mkdir -p $PREFIX/bin
+cd src/
 
-make CXX=$CC CXXFLAGS="$CFLAGS"
-cp Phi $PREFIX/bin
-cp -r ppma_2_bmp $PREFIX/bin
-cp Profile $PREFIX/bin
+make
+cp ../Phi $PREFIX/bin
+cp ../ppma_2_bmp $PREFIX/bin
 
-chmod -R +x $PREFIX/bin/*
+chmod +x $PREFIX/bin/Phi
+chmod +x $PREFIX/bin/ppma_2_bmp
+

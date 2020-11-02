@@ -4,7 +4,7 @@ about:
   summary: 'Suitable for de novo assembly of large and small genomes.'
 
 build:
-  number: 2
+  number: 0
   skip: True # [osx]
 
 package:
@@ -13,13 +13,14 @@ package:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-  host:
-    - jemalloc
-    - zlib
+      - gcc
+      - jemalloc
+      - zlib
   run:
-    - jemalloc
-    - zlib
+      - libgcc
+      - jemalloc
+      - zlib
 
 source:
+  fn: discovardenovo-52488.tar.gz
   url: ftp://ftp.broadinstitute.org/pub/crd/DiscovarDeNovo/latest_source_code/discovardenovo-52488.tar.gz

@@ -8,28 +8,26 @@ about:
   summary: 'paired-end read merger'
 
 source:
+  fn: pear-0.9.6-src.tar.gz
   md5: 5ed68d50c1620cd55c58681e38771799
-  url: https://depot.galaxyproject.org/software/pear/pear_0.9.6_src_all.tar.gz
+  url: http://sco.h-its.org/exelixis/web/software/pear/files/pear-0.9.6-src.tar.gz
 
 build:
-  number: 6
+  number: 2
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - gcc  # [not osx]
+    - llvm  # [osx]
     - pkgconfig
-  host:
     - zlib
     - bzip2
   run:
+    - libgcc # [not osx]
     - zlib
     - bzip2
 
 test:
   commands:
-    - pear 2>&1 | grep "PEAR v0.9.6"
-    - pearRM 2>&1 | grep "PEAR v0.9.6"
-
-extra:
-  identifiers:
-    - biotools:PEAR
+    - pear 2>&1 | grep 'PEAR v0.9.6'
+    - pearRM 2>&1 | grep 'PEAR v0.9.6'

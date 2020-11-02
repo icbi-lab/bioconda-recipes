@@ -1,9 +1,10 @@
+{% set name = "mgs-canopy" %}
 {% set version = "1.0" %}
 {% set sha256 = "9f227c6554c65054f552ad274e48102084dfc126cec9f28f8a3caf5afe922489" %}
 {% set md5 = "027627c3090a7adc8ad7238d4900636a" %}
 
 package:
-  name: mgs-canopy
+  name: {{ name }}
   version: {{ version }}
 
 source:
@@ -12,18 +13,18 @@ source:
   md5: {{ md5 }}
 
 build:
-  number: 3
+  number: 1
   skip: True  # [osx]
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-    - llvm-openmp  # [osx]
-    - libgomp      # [linux]
-  host:
-    - boost-cpp
+    - boost {{ CONDA_BOOST }}*
+    - gcc   # [not osx]
+    - llvm  # [osx]
+
   run:
-    - boost-cpp
+    - boost {{ CONDA_BOOST }}*
+    - libgcc    # [not osx]
 
 test:
   commands:
@@ -36,7 +37,6 @@ about:
   summary: "Canopy clustering algorithm"
 
 extra:
-  recipe-maintainers:
+  maintainers:
     - keuv-grvl
-  identifiers:
-    - doi:10.1038/nbt.2939
+  doi: 10.1038/nbt.2939

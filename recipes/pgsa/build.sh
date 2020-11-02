@@ -1,7 +1,4 @@
 #!/bin/bash
-for f in nbproject/*.mk ; do
-    sed -i.bak "s#gcc#$CC#g;s#g++#$CXX#g" $f
-done
 
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/lib

@@ -6,7 +6,6 @@ PACKAGE_HOME=$PREFIX/share/$PKG_NAME-$PKG_VERSION-$PKG_BUILDNUM
 
 # Create destination directories
 mkdir -p $PACKAGE_HOME
-mkdir -p ${PREFIX}/bin
 
 # Copy files over into $PACKAGE_HOME
 cp -aR * $PACKAGE_HOME

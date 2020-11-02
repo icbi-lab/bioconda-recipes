@@ -6,11 +6,12 @@ package:
   version: {{ version }}
 
 source:
+  fn: prophyle-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/p/prophyle/prophyle-{{version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  number: 6
+  number: 1
   skip: True # [py27]
   script:
   entry_points:
@@ -28,23 +29,26 @@ build:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-    - {{ compiler('c') }}
-  host:
-    - python
-    - pip
-    - samtools
-    - zlib
-    - psutil
-    - zlib
-  run:
+    - gcc  # [linux]
+    - llvm # [osx]
     - python
     - samtools
     - ete3
     - bitarray
     - scipy
     - wheel
-    - zlib
+    - zlib {{CONDA_ZLIB }}*
+    - psutil
+    - pysam
+  run:
+    - libgcc # [linux]
+    - python
+    - samtools
+    - ete3
+    - bitarray
+    - scipy
+    - wheel
+    - zlib {{ CONDA_ZLIB }}*
     - psutil
     - pysam
 
@@ -75,6 +79,5 @@ test:
 about:
   home: https://github.com/karel-brinda/prophyle
   license: MIT
-  license_file: LICENSE.txt
   summary: ProPhyle is an accurate, resource-frugal and deterministic phylogeny-based metagenomic classifier.
 

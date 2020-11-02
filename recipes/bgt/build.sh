@@ -1,6 +1,10 @@
 #!/bin/bash
 
-make CC="${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}"
-install -d "${PREFIX}/bin"
-install bgt "${PREFIX}/bin/"
+mkdir -p $PREFIX/bin
+export CFLAGS="-I$PREFIX/include"
+export LDFLAGS="-L$PREFIX/lib"
+export CPATH=${PREFIX}/include
+
+make 
+mv bgt  $PREFIX/bin
 

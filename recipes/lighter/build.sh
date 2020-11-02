@@ -1,5 +1,8 @@
 #!/bin/sh
 
-mkdir -p $PREFIX/bin
-make CXX=${CXX} CXXFLAGS="${CXXFLAGS}" LDFLAGS="${LDFLAGS}"
+export CPLUS_INCLUDE_PATH=$PREFIX/include
+
+mkdir -p $PREXIX/bin
+make
 cp lighter $PREFIX/bin
+

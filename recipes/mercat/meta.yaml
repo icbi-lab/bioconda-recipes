@@ -7,21 +7,20 @@ package:
   version: {{ version }}
 
 source:
+  fn: {{ name|lower }}_{{ version }}.tar.gz
   url: https://github.com/pnnl/mercat/archive/{{ version }}.tar.gz
   md5: d5bef2073368f8a82a46015bebc8962d
 
 
 build:
-  noarch: python
-  number: 2
-  script: python -m pip install --no-deps --ignore-installed .
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
 
 preserve_egg_dir: yes
 
 requirements:
-  host:
+  build:
     - python
-    - pip
     - setuptools
 
   run:

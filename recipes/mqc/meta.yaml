@@ -1,18 +1,18 @@
 package:
   name: mqc
-  version: "1.10"
+  version: "1.9"
 
 source:
-  url: https://github.com/Biobix/mQC/archive/1.10.tar.gz
-  md5: e807d15c8b395ca34f46f2c7540a6290
+  url: https://github.com/Biobix/mQC/archive/1.9.tar.gz
+  md5: 4ed042a097f447a2e0e43bda27b94101
 
 build:
-  noarch: generic
-  number: 2
+  skip: True  # [not py27]
+  number: 0
 
 requirements:
   run:
-    - python <3
+    - python
     - numpy
     - pandas
     - matplotlib
@@ -23,14 +23,13 @@ requirements:
     - perl-dbi
     - perl-dbd-sqlite
     - perl-parallel-forkmanager
-    - plastid 0.4.7 py27_0
+    - plastid
     - samtools
     - pysam 0.11*
 
 test:
   commands:
     - mQC.pl --help
-    - psite -h
 
 about:
   home: https://github.com/Biobix/mQC

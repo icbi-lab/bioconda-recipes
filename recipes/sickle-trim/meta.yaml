@@ -6,19 +6,18 @@ package:
   version: {{ version }}
 
 source:
+  fn: sickle-{{ version }}.tar.gz
   url: https://github.com/najoshi/sickle/archive/v{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  number: 5
+  number: 1
 
 requirements:
   build:
-    - {{ compiler('c') }}
-  host:
-    - zlib
+    - zlib 1.2.8
   run:
-    - zlib
+    - zlib 1.2.8
 
 test:
   commands:

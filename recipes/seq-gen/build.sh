@@ -1,7 +1,13 @@
 #!/bin/bash
 
-cd source
-make CLINKER="${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}"
+export CFLAGS="-I$PREFIX/include"
+export LDFLAGS="-L$PREFIX/lib"
+export CPATH=${PREFIX}/include
 
-install -d "${PREFIX}/bin"
-install seq-gen "${PREFIX}/bin/"
+mkdir -p $PREFIX/bin
+
+
+cd $SRC_DIR/source
+make
+
+cp seq-gen $PREFIX/bin

@@ -5,17 +5,19 @@ package:
 source:
   url: https://github.com/BioTools-Tek/funcannot/archive/master.zip
   md5: 2e70b503a1632998deba759b50c0c07f
-
+   
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - gcc # [linux]
+    - llvm # [osx]
     - qt 4.8.7
 
   run:
+    - libgcc # [linux]
     - qt 4.8.7
 
 

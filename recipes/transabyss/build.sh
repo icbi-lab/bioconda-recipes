@@ -7,6 +7,7 @@ mkdir -p $PREFIX/bin
 
 chmod 777 bin/*
 cp bin/* $PREFIX/bin
+cp -rf configs $PREFIX/
 
 mkdir -p $TOPDIR/scripts
 mv transabyss $TOPDIR/scripts/
@@ -20,13 +21,11 @@ cd $TOPDIR/utilities
 cd $TOPDIR
 cd utilities
 sed -i.bak 's/from utilities import/from transabyss import/' *.py
-sed -i.bak "s|PACKAGEDIR =.*|PACKAGEDIR = '${PREFIX}'|" package_info.py
 
 cd $TOPDIR
 mkdir transabyss
 cp -rf utilities/* transabyss/
 
 cp $RECIPE_DIR/setup.py ./
-sed -i.bak "s/version=.*/version='${PKG_VERSION}',/" setup.py
 python setup.py build
-$PYTHON -m pip install . --ignore-installed --no-deps -vv
+python setup.py install

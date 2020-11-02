@@ -3,24 +3,25 @@ package:
   version: '1.0.1'
 
 source:
+  fn: mergevcf-0ac3e63.tar.gz
   url: https://github.com/ljdursi/mergevcf/archive/0ac3e63.tar.gz
   md5: f3f1af91d1e2cdc89d51fc14a351be21
 
 build:
-  noarch: python
-  number: 2
-  script: {{ PYTHON }} -m pip install . --ignore-installed --no-deps -vv
+  number: 0
+  skip: True # [not py27]
 
 requirements:
-  host:
-    - python <3
-    - pip
+  build:
+    - python
+    - setuptools
+    - pyvcf
   run:
-    - python <3
+    - python
     - pyvcf
 
 test:
-  commands:
+  run:
     - mergevcf -h
 
 about:

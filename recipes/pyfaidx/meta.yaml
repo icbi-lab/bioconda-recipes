@@ -1,24 +1,23 @@
-{% set version = "0.5.9.1" %}
+{% set version = "0.5.1" %}
 
 package:
   name: pyfaidx
   version: {{ version }}
 
 source:
-  url: https://github.com/mdshw5/pyfaidx/archive/v{{ version }}.tar.gz
-  sha256: 597b03286bc494a77a4c51d81cac00087bf7c9442534ac547bc6fa9c5320765a
+  fn: pyfaidx-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/p/pyfaidx/pyfaidx-{{ version }}.tar.gz
+  sha256: 7d5877fab01849fee78cdc7d336267310c07165171a099b4e024061c54dceb08
 
 build:
-  number: 1
-  noarch: python
   entry_points:
     - faidx = pyfaidx.cli:main
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv "
 
 requirements:
-  host:
+  build:
     - python
-    - pip
+    - six
+    - setuptools
 
   run:
     - python
@@ -36,8 +35,3 @@ about:
   license: BSD License
   summary: 'pyfaidx: efficient pythonic random access to fasta subsequences'
   license_family: BSD
-
-extra:
-  identifiers:
-    - biotools:pyfaidx
-    - doi:10.7287/peerj.preprints.970v1

@@ -1,24 +1,22 @@
 package:
-  name: muse
-  version: 1.0.rc
+    name: muse
+    version: 1.0.rc
 
 source:
-  md5: c63fdb48c041f6f9545879f1a7e4da58
-  url: https://github.com/danielfan/MuSE/archive/v1.0-rc.tar.gz
-  patches:
-    - 0001-add-LDFLAGS.patch
+    md5: c63fdb48c041f6f9545879f1a7e4da58
+    url: https://github.com/danielfan/MuSE/archive/v1.0-rc.tar.gz
 
 build:
-  number: 4
+    number: 0
 
 requirements:
-  build:
-    - {{ compiler('cxx') }}
-    - {{ compiler('c') }}
-  host:
-    - zlib
-  run:
-    - zlib
+    build:
+        - gcc   # [not osx]
+        - llvm  # [osx]
+        - zlib {{CONDA_ZLIB}}*
+    run:
+        - libgcc    # [not osx]
+        - zlib {{CONDA_ZLIB}}*
 
 test:
   commands:

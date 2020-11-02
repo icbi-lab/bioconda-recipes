@@ -1,10 +1,5 @@
-#!/bin/bash
-
 mkdir build
 cd build
-cmake \
-    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-    -DBUILD_SHARED_LIBS=ON \
-    ..
+cmake .. -DCMAKE_INSTALL_PREFIX=$PREFIX 
 make
 make install

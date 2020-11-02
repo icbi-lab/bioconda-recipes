@@ -1,43 +1,37 @@
-{% set version = "2.32.0" %}
+{% set version = "2.22.0" %}
 {% set name = "Rgraphviz" %}
-{% set bioc = "3.11" %}
+{% set bioc = "3.6" %}
 
 package:
   name: 'bioconductor-{{ name|lower }}'
   version: '{{ version }}'
 source:
+  fn: '{{ name }}_{{ version }}.tar.gz'
   url:
-    - 'https://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
-    - 'https://bioarchive.galaxyproject.org/{{ name }}_{{ version }}.tar.gz'
-    - 'https://depot.galaxyproject.org/software/bioconductor-{{ name|lower }}/bioconductor-{{ name|lower }}_{{ version }}_src_all.tar.gz'
-  md5: 171d3767a0cee2b00cf924abfc221256
+    - 'http://bioconductor.org/packages/{{ bioc }}/bioc/src/contrib/{{ name }}_{{ version }}.tar.gz'
+    - 'https://depot.galaxyproject.org/software/{{ name }}/{{ name }}_{{ version }}_src_all.tar.gz'
+  sha256: 1bfb8ac90df797365cf883813505f3b63a01061f515c009924c424e59cf436f9
+  patches: # [osx]
+    - rpath.patch  # [osx]
 build:
   number: 0
   rpaths:
     - lib/R/lib/
     - lib/
-# Suggests: RUnit, BiocGenerics, XML
-# SystemRequirements: optionally Graphviz (>= 2.16)
 requirements:
-  host:
-    - 'bioconductor-graph >=1.66.0,<1.67.0'
-    - r-base
-    - libblas
-    - liblapack
-  run:
-    - 'bioconductor-graph >=1.66.0,<1.67.0'
-    - r-base
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - automake
-    - make
+    - bioconductor-graph
+    - r-base
+    - llvm  # [osx]
+    - gcc  # [linux]
+  run:
+    - bioconductor-graph
+    - r-base
+    - libgcc # [linux]
 test:
   commands:
     - '$R -e "library(''{{ name }}'')"'
 about:
-  home: 'https://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
+  home: 'http://bioconductor.org/packages/{{ bioc }}/bioc/html/{{ name }}.html'
   license: EPL
-  summary: 'Provides plotting capabilities for R graph objects'
-  description: 'Interfaces R with the AT and T graphviz library for plotting R graph objects from the graph package.'
-
+  summary: 'Interfaces R with the AT and T graphviz library for plotting R graph objects from the graph package.'

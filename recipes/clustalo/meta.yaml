@@ -10,15 +10,18 @@ source:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
-    - {{ compiler('c') }}
-  host:
+    - gcc # [linux]
+    - llvm # [osx]
     - argtable2
   run:
+    - llvm # [osx]
+    - libgcc # [linux]
     - argtable2
+    
+    
 
 build:
-  number: 3
+  number: 0
 
 test:
   commands:
